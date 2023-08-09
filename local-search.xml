@@ -25,13 +25,19 @@
   
   
   <entry>
-    <title>Hello World</title>
-    <link href="/3xsh0re.github.io/2023/08/08/hello-world/"/>
-    <url>/3xsh0re.github.io/2023/08/08/hello-world/</url>
+    <title>博客简介</title>
+    <link href="/3xsh0re.github.io/2023/08/08/Hello!/"/>
+    <url>/3xsh0re.github.io/2023/08/08/Hello!/</url>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="欢迎来到3xsh0re的博客"><a href="#欢迎来到3xsh0re的博客" class="headerlink" title="欢迎来到3xsh0re的博客"></a>欢迎来到3xsh0re的博客</h2><p>​我是一个网络安全行业的初学者，在这里我会更新自己的学习动态，如果你偶然翻到，那说明我们一定很有缘分哦！😘😘😘</p><p>​在这里，我会更新渗透测试、SRC挖掘、web安全的一些内容，希望自己可以持之以恒的更新下去，加油！！！😎</p>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>简介</tag>
+      
+    </tags>
     
   </entry>
   
