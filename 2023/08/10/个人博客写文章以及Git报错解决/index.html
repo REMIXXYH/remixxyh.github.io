@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://remixxyh.github.io/2023/08/10/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%86%99%E6%96%87%E7%AB%A0%E4%BB%A5%E5%8F%8AGit%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/Snipaste_2023-08-10_09-50-25.png">
 <meta property="og:image" content="https://remixxyh.github.io/2023/08/10/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%86%99%E6%96%87%E7%AB%A0%E4%BB%A5%E5%8F%8AGit%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/Snipaste_2023-08-10_09-54-25.png">
 <meta property="article:published_time" content="2023-08-10T01:46:40.000Z">
-<meta property="article:modified_time" content="2023-08-10T02:11:52.803Z">
+<meta property="article:modified_time" content="2023-08-10T02:16:56.468Z">
 <meta property="article:author" content="3xsh0re">
 <meta property="article:tag" content="Github">
 <meta property="article:tag" content="博客搭建">
@@ -293,11 +293,21 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">分类</span><br><span class="hljs-attr">date:</span> <span class="hljs-number">2019-04-24 15:30:30</span><br><span class="hljs-attr">type:</span> <span class="hljs-string">categories</span><br><span class="hljs-meta">---</span><br></code></pre></td></tr></table></figure>
 
 <p>保存并关闭文件。</p>
-<p>打开需要添加分类的文章，为其添加categories属性。下方的<code>categories: web前端</code>表示添加这篇文章到“web前端”这个分类。注意：hexo一篇文章只能属于一个分类，也就是说如果在“- web前端”下方添加“-xxx”，hexo不会产生两个分类，而是把分类嵌套（即该文章属于 “- web前端”下的 “-xxx ”分类）。</p>
+<p>给文章添加categories标签</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">个人博客写文章以及Git报错解决</span><br><span class="hljs-attr">date:</span> <span class="hljs-number">2023-08-10 09:46:40</span><br><span class="hljs-attr">categories:</span> <span class="hljs-string">Github个人博客搭建和使用</span><br><span class="hljs-meta">---</span><br></code></pre></td></tr></table></figure>
 
 <p>至此，成功给文章添加分类，点击首页的“分类”可以看到该分类下的所有文章。当然，只有添加了<code>categories: xxx</code>的文章才会被收录到首页的“分类”中。</p>
-<h4 id="给文章添加“tags”属性"><a href="#给文章添加“tags”属性" class="headerlink" title="给文章添加“tags”属性"></a>给文章添加“tags”属性</h4><p>打开需要添加标签的文章，为其添加tags属性。下方的<code>tags:</code>下方的<code>- jQuery</code> <code>- 表格</code><br><code>- 表单验证</code>就是这篇文章的标签了</p>
+<h4 id="给文章添加“tags”属性"><a href="#给文章添加“tags”属性" class="headerlink" title="给文章添加“tags”属性"></a>给文章添加“tags”属性</h4><p>生成“标签”页并添加tpye属性,进入博客目录。执行命令下方命令</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haxe">hexo <span class="hljs-keyword">new</span> <span class="hljs-type">page</span> tags<br></code></pre></td></tr></table></figure>
+
+<p>categories文件夹下会有index.md这个文件，打开后默认内容是这样的：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">categories</span><br><span class="hljs-attr">date:</span> <span class="hljs-number">2023-08-10 10:11:27</span><br><span class="hljs-meta">---</span><br></code></pre></td></tr></table></figure>
+
+<p>添加type: “categories”到内容中，添加后是这样的：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">标签</span><br><span class="hljs-attr">date:</span> <span class="hljs-number">2023-08-10 10:11:27</span><br><span class="hljs-attr">type:</span> <span class="hljs-string">tags</span><br><span class="hljs-meta">---</span><br></code></pre></td></tr></table></figure>
+
+<p>保存并关闭文件。</p>
+<p>给文章添加tags标签</p>
 <figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs subunit">title: 个人博客写文章以及Git报错解决<br>date: 2023<span class="hljs-string">-08</span><span class="hljs-string">-10</span> 09:46:40<br>categories: Github个人博客搭建和使用<br><span class="hljs-keyword">tags:</span> [Github,博客搭建]<br></code></pre></td></tr></table></figure>
 
 <p>至此，成功给文章添加分类，点击首页的“标签”可以看到该标签下的所有文章。当然，只有添加了<code>tags: xxx</code>的文章才会被收录到首页的“标签”中。</p>
