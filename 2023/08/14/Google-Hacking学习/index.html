@@ -24,7 +24,7 @@
 <meta property="og:description" content="Google搜索语法1234567intitle: 搜索网页标题中包含有特定字符的网页。例如输入“intitle: cbi”，这样网页标题中带有cbi的网页都会被搜索出来。inurl: 搜索包含有特定字符的URL。例如输入“inurl:cbi”，则可以找到带有cbi字符的URL。intext: 搜索网页正文内容中的指定字符，例如输入“intext:cbi”。这个语法类似我们平时在某些网站中使用的“">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-14T06:01:50.000Z">
-<meta property="article:modified_time" content="2023-08-14T06:22:00.816Z">
+<meta property="article:modified_time" content="2023-08-16T12:08:34.728Z">
 <meta property="article:author" content="3xsh0re">
 <meta property="article:tag" content="SRC">
 <meta property="article:tag" content="技巧">
@@ -313,11 +313,8 @@
                 
                 <h3 id="Google搜索语法"><a href="#Google搜索语法" class="headerlink" title="Google搜索语法"></a>Google搜索语法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">intitle: 搜索网页标题中包含有特定字符的网页。例如输入“intitle: cbi”，这样网页标题中带有cbi的网页都会被搜索出来。<br><br>inurl: 搜索包含有特定字符的URL。例如输入“inurl:cbi”，则可以找到带有cbi字符的URL。<br><br>intext: 搜索网页正文内容中的指定字符，例如输入“intext:cbi”。这个语法类似我们平时在某些网站中使用的“文章内容搜索”功能。Filetype:搜索指定类型的文件。例如输入“filetype:cbi”，将返回所有以cbi结尾的文件URL。<br><br>Site: 找到与指定网站有联系的URL。例如输入“Site:family.chinaok.com”。所有和这个网站有联系的URL都会被显示。这些就是Google的常用语法，也是Google Hack的必用语法。虽然这只是Google语法中很小的部分，但是合理使用这些语法将产生意想不到的效果。<br></code></pre></td></tr></table></figure>
 
-<h3 id="GoogleHacking"><a href="#GoogleHacking" class="headerlink" title="GoogleHacking"></a>GoogleHacking</h3><p>inurl:Login 将返回url中含有Login的网页</p>
-<p>intitle:后台登录管理员 将返回含有管理员后台的网页</p>
-<p>intext:后台登录 将返回含有后台的网页</p>
-<p>inurl:&#x2F;admin&#x2F;login.php 将返回含有admin后台的网页</p>
-<p>inurl:&#x2F;phpmyadmin&#x2F;index.php 将返回含有phpmyadmin后台的网页</p>
+<h3 id="GoogleHacking"><a href="#GoogleHacking" class="headerlink" title="GoogleHacking"></a>GoogleHacking</h3><h4 id="寻找登陆页面"><a href="#寻找登陆页面" class="headerlink" title="寻找登陆页面"></a>寻找登陆页面</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">inurl:Login <br><br>intitle:后台登录管理员 <br><br>intext:后台登录 <br><br>inurl:/admin/login.php <br><br>inurl:/phpmyadmin/index.php 将返回含有phpmyadmin后台的网页<br></code></pre></td></tr></table></figure>
+
 <p>site:<a href="https://link.zhihu.com/?target=http://baidu.com">http://baidu.com</a> inur:Login 将只在<a href="https://link.zhihu.com/?target=http://baidu.com">http://baidu.com</a>中查找urI中含有Login的网页</p>
 <p>site:<a href="https://link.zhihu.com/?target=http://baidu.com">http://baidu.com</a> filetype:pdf 将只返回<a href="https://link.zhihu.com/?target=http://baidu.com">http://baidu.com</a>站点上文件类型为pdf的网页</p>
 <p>link:<a href="https://link.zhihu.com/?target=http://www.baidu.com">http://www.baidu.com</a> 将返回所有包含指向<a href="https://link.zhihu.com/?target=http://www.baidu.com">http://www.baidu.com</a>的网页</p>
