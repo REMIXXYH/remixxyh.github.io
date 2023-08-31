@@ -32,8 +32,9 @@
 <meta property="og:image" content="https://remixxyh.github.io/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-08-16_14-02-15.png">
 <meta property="og:image" content="https://remixxyh.github.io/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-08-16_15-05-52.png">
 <meta property="og:image" content="https://remixxyh.github.io/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-08-18_20-21-57.png">
+<meta property="og:image" content="d:\Personal_Blog\hexo-blog\source_posts\GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1\Snipaste_2023-08-31_15-53-48.png">
 <meta property="article:published_time" content="2023-08-15T11:12:20.000Z">
-<meta property="article:modified_time" content="2023-08-18T12:23:11.270Z">
+<meta property="article:modified_time" content="2023-08-31T08:22:43.167Z">
 <meta property="article:author" content="3xsh0re">
 <meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary_large_image">
@@ -259,7 +260,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.6k 字
+          8.9k 字
         
       </span>
     
@@ -270,7 +271,7 @@
         
         
         
-          64 分钟
+          74 分钟
         
       </span>
     
@@ -454,7 +455,20 @@
 
 <p><img src="/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-08-18_20-21-57.png" srcset="/img/loading.gif" lazyload></p>
 <h4 id="并发获取多个URL"><a href="#并发获取多个URL" class="headerlink" title="并发获取多个URL"></a>并发获取多个URL</h4><p>Go语言最有意思并且最新奇的特性就是对并发编程的支持</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	start := time.Now()<br>	ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">string</span>)<br>	<span class="hljs-keyword">for</span> _, url := <span class="hljs-keyword">range</span> os.Args[<span class="hljs-number">1</span>:] &#123;<br>		<span class="hljs-keyword">go</span> fetch(url, ch)<br>	&#125;<br>	<span class="hljs-keyword">for</span> <span class="hljs-keyword">range</span> os.Args[<span class="hljs-number">1</span>:] &#123;<br>		fmt.Println(&lt;-ch)<br>	&#125;<br>	fmt.Printf(<span class="hljs-string">&quot;%.2fs elapsed\n&quot;</span>, time.Since(start).Seconds())<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fetch</span><span class="hljs-params">(url <span class="hljs-type">string</span>, ch <span class="hljs-keyword">chan</span>&lt;- <span class="hljs-type">string</span>)</span></span> &#123;<br>	start := time.Now()<br>	resp, err := http.Get(url)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		ch &lt;- fmt.Sprint(err)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br>	nbytes, err := io.Copy(ioutil.Discard, resp.Body)<br>	resp.Body.Close()<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		ch &lt;- fmt.Sprintf(<span class="hljs-string">&quot;while reading %s: %v&quot;</span>, url, err)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br>	secs := time.Since(start).Seconds()<br>	ch &lt;- fmt.Sprintf(<span class="hljs-string">&quot;%.2fs %7d %s&quot;</span>, secs, nbytes, url)<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<p>在<code>terminal</code>里执行：<code>go run hello.go https://www.baidu.com http://gopl.io https://remixxyh.github.io</code></p>
+<p>将会得到：</p>
+<p><img src="D:\Personal_Blog\hexo-blog\source_posts\GO学习笔记-1\Snipaste_2023-08-31_15-53-48.png" srcset="/img/loading.gif" lazyload></p>
+<p>我们可以发现整个程序执行的时间由获取请求最长的那个决定</p>
+<p>这是一个并发请求的程序，分析上面的代码：</p>
+<ul>
+<li><code>ch := make(chan string)</code>是一个用于在<code>Goroutine</code>之间传递数据的管道，每当<code>fetch</code>函数执行完毕后，它会将一个带有消息的字符串发送到通道中</li>
+<li><code>Goroutine</code>是一种函数的并发执行方式，<code>main</code>函数本身也运行在一个<code>goroutine</code>中，而<code>go function</code>则表示创建一个新的goroutine，并在这个新的goroutine中执行这个函数</li>
+<li>这个程序里会异步执行<code>Get</code>方法，将<code>Body</code>拷贝到<code>ioutil.Discard</code>（可以把这个变量看成一个垃圾桶）输出流中，<code>io.Copy</code>函数会返回两个值(复制的字节数和可能的错误)，从而实现不处理<code>Body</code>，得到响应体的字节数</li>
+<li><strong>在使用通道发送或者接收数据时，如果此时通道已满或者主函数<code>main</code>没有做好接收的准备（注意：<code>main</code>函数也是一个<code>Goroutine</code>），那么会在发送数据的<code>Goroutine</code>那里阻塞，这个例子中就是<code>fetch</code>函数；如果通道为空或者没有数据可以使用，那么会在接收数据的<code>Goroutine</code>那里阻塞。所以这个例子在<code>main</code>使用一个<code>for</code>循环接收数据，是为了防止主函数执行完了但是<code>fetch</code>还没有执行完</strong>。</li>
+</ul>
+<h5 id="练习1-10"><a href="#练习1-10" class="headerlink" title="练习1.10"></a>练习1.10</h5>
                 
               </div>
             
