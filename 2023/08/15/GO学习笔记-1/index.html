@@ -33,8 +33,11 @@
 <meta property="og:image" content="https://remixxyh.github.io/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-08-16_15-05-52.png">
 <meta property="og:image" content="https://remixxyh.github.io/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-08-18_20-21-57.png">
 <meta property="og:image" content="https://remixxyh.github.io/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-08-31_15-53-48.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-09-01_14-09-52.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-09-01_14-08-41.png">
+<meta property="og:image" content="d:\Personal_Blog\hexo-blog\source_posts\GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1\Snipaste_2023-09-01_14-15-13.png">
 <meta property="article:published_time" content="2023-08-15T11:12:20.000Z">
-<meta property="article:modified_time" content="2023-08-31T15:00:31.376Z">
+<meta property="article:modified_time" content="2023-09-01T06:18:58.575Z">
 <meta property="article:author" content="3xsh0re">
 <meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary_large_image">
@@ -260,7 +263,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.9k 字
+          10k 字
         
       </span>
     
@@ -271,7 +274,7 @@
         
         
         
-          74 分钟
+          84 分钟
         
       </span>
     
@@ -366,7 +369,7 @@
 <p><code>go version</code>查看是否安装完成</p>
 <p><img src="/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-08-15_19-55-52.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="开始GO-——Part1"><a href="#开始GO-——Part1" class="headerlink" title="开始GO!——Part1"></a>开始GO!——Part1</h3><p>笔者跟着《Go语言圣经》一起学习的~~😘</p>
-<p>对应圣经入门部分</p>
+<p>对应第一章</p>
 <h4 id="编写第一个GO程序"><a href="#编写第一个GO程序" class="headerlink" title="编写第一个GO程序"></a>编写第一个GO程序</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;io/ioutil&quot;</span><br>	<span class="hljs-string">&quot;net/http&quot;</span><br>	<span class="hljs-string">&quot;os&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// 通过循环遍历命令行参数中的每个URL</span><br>	<span class="hljs-keyword">for</span> _, url := <span class="hljs-keyword">range</span> os.Args[<span class="hljs-number">1</span>:] &#123;<br>		<span class="hljs-comment">// 使用HTTP GET请求获取URL的响应</span><br>		resp, err := http.Get(url)<br>		<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>			<span class="hljs-comment">// 如果发生错误，将错误信息输出到标准错误流并退出程序</span><br>			fmt.Fprintf(os.Stderr, <span class="hljs-string">&quot;fetch:%v\n&quot;</span>, err)<br>			os.Exit(<span class="hljs-number">1</span>)<br>		&#125;<br><br>		<span class="hljs-comment">// 读取响应体的内容</span><br>		b, err := ioutil.ReadAll(resp.Body)<br>		resp.Body.Close()<br>		<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>			<span class="hljs-comment">// 如果在读取过程中发生错误，将错误信息输出到标准错误流并退出程序</span><br>			fmt.Fprintf(os.Stderr, <span class="hljs-string">&quot;fetch: reading %s: %v\n&quot;</span>, url, err)<br>			os.Exit(<span class="hljs-number">1</span>)<br>		&#125;<br><br>		<span class="hljs-comment">// 将获取到的内容输出到标准输出</span><br>		fmt.Printf(<span class="hljs-string">&quot;%s&quot;</span>, b)<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>在命令行里执行<code>go run .\Hello.go http://gopl.io</code>，得到返回包，说明你的Go语言环境已经完全搭建成功啦！</p>
@@ -471,7 +474,19 @@
 <li>这个程序里会异步执行<code>Get</code>方法，将<code>Body</code>拷贝到<code>ioutil.Discard</code>（可以把这个变量看成一个垃圾桶）输出流中，<code>io.Copy</code>函数会返回两个值(复制的字节数和可能的错误)，从而实现不处理<code>Body</code>，得到响应体的字节数</li>
 <li><strong>在使用通道发送或者接收数据时，如果此时通道已满或者主函数<code>main</code>没有做好接收的准备（注意：<code>main</code>函数也是一个<code>Goroutine</code>），那么会在发送数据的<code>Goroutine</code>那里阻塞，这个例子中就是<code>fetch</code>函数；如果通道为空或者没有数据可以使用，那么会在接收数据的<code>Goroutine</code>那里阻塞。所以这个例子在<code>main</code>使用一个<code>for</code>循环接收数据，是为了防止主函数执行完了但是<code>fetch</code>还没有执行完</strong>。</li>
 </ul>
-<h5 id="练习1-10"><a href="#练习1-10" class="headerlink" title="练习1.10"></a>练习1.10</h5>
+<h4 id="Web服务"><a href="#Web服务" class="headerlink" title="Web服务"></a>Web服务</h4><p>Go语言的内置库使得写一个类似fetch的web服务器变得异常地简单。在本节中，我们会展示 一个微型服务器，这个服务器的功能是返回当前用户正在访问的URL。比如用户访问的是 <a target="_blank" rel="noopener" href="http://localhost:8000/hello">http://localhost:8000/hello</a> ，那么响应是URL.Path &#x3D; “hello”。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	http.HandleFunc(<span class="hljs-string">&quot;/&quot;</span>, handler)<br>	log.Fatal(http.ListenAndServe(<span class="hljs-string">&quot;localhost:8000&quot;</span>, <span class="hljs-literal">nil</span>))<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">handler</span><span class="hljs-params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;<br>	fmt.Fprintf(w, <span class="hljs-string">&quot;URL.Path = %q\n&quot;</span>, r.URL.Path)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-09-01_14-09-52.png" srcset="/img/loading.gif" lazyload></p>
+<p>在浏览器里访问：</p>
+<p><img src="/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-09-01_14-08-41.png" srcset="/img/loading.gif" lazyload></p>
+<p>多个控制器：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> mu sync.Mutex<br><span class="hljs-keyword">var</span> count <span class="hljs-type">int</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	http.HandleFunc(<span class="hljs-string">&quot;/&quot;</span>, handler)<br>	http.HandleFunc(<span class="hljs-string">&quot;/count&quot;</span>, counter)<br>	log.Fatal(http.ListenAndServe(<span class="hljs-string">&quot;localhost:8000&quot;</span>, <span class="hljs-literal">nil</span>))<br>&#125;<br><br><span class="hljs-comment">// handler echoes the Path component of the requested URL.</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">handler</span><span class="hljs-params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;<br>	mu.Lock()<br>	count++<br>	mu.Unlock()<br>	fmt.Fprintf(w, <span class="hljs-string">&quot;URL.Path = %q\n&quot;</span>, r.URL.Path)<br>&#125;<br><br><span class="hljs-comment">// counter echoes the number of calls so far.</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">counter</span><span class="hljs-params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;<br>	mu.Lock()<br>	fmt.Fprintf(w, <span class="hljs-string">&quot;Count %d\n&quot;</span>, count)<br>	mu.Unlock()<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="D:\Personal_Blog\hexo-blog\source_posts\GO学习笔记-1\Snipaste_2023-09-01_14-15-13.png" srcset="/img/loading.gif" lazyload></p>
+<p>​		在这些代码的背后，服务器每一 次接收请求处理时都会另起一个<code>goroutine</code>，这样服务器就可以同一时间处理多个请求。在并发情况下，两个请求同一时刻去更新<code>count</code>，那么这个值可能并不会被正确地 增加；这个程序可能会引发一个严重的<code>bug</code>：竞态条件。</p>
+<p>​		<strong>为了避免这个问题，我们必须保证每次修改变量的最多只能有一个<code>goroutine</code>，这也就是代码里的<code>mu.Lock()</code>和 <code>mu.Unlock()</code>调用将修改<code>count</code>的所有行为包在中间的目的。</strong></p>
+
                 
               </div>
             
