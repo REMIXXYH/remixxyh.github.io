@@ -35,9 +35,9 @@
 <meta property="og:image" content="https://remixxyh.github.io/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-08-31_15-53-48.png">
 <meta property="og:image" content="https://remixxyh.github.io/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-09-01_14-09-52.png">
 <meta property="og:image" content="https://remixxyh.github.io/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-09-01_14-08-41.png">
-<meta property="og:image" content="d:\Personal_Blog\hexo-blog\source_posts\GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1\Snipaste_2023-09-01_14-15-13.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-09-01_14-15-13.png">
 <meta property="article:published_time" content="2023-08-15T11:12:20.000Z">
-<meta property="article:modified_time" content="2023-09-01T06:18:58.575Z">
+<meta property="article:modified_time" content="2023-09-01T06:21:50.934Z">
 <meta property="article:author" content="3xsh0re">
 <meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary_large_image">
@@ -274,7 +274,7 @@
         
         
         
-          84 分钟
+          85 分钟
         
       </span>
     
@@ -483,9 +483,10 @@
 <p>多个控制器：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> mu sync.Mutex<br><span class="hljs-keyword">var</span> count <span class="hljs-type">int</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	http.HandleFunc(<span class="hljs-string">&quot;/&quot;</span>, handler)<br>	http.HandleFunc(<span class="hljs-string">&quot;/count&quot;</span>, counter)<br>	log.Fatal(http.ListenAndServe(<span class="hljs-string">&quot;localhost:8000&quot;</span>, <span class="hljs-literal">nil</span>))<br>&#125;<br><br><span class="hljs-comment">// handler echoes the Path component of the requested URL.</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">handler</span><span class="hljs-params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;<br>	mu.Lock()<br>	count++<br>	mu.Unlock()<br>	fmt.Fprintf(w, <span class="hljs-string">&quot;URL.Path = %q\n&quot;</span>, r.URL.Path)<br>&#125;<br><br><span class="hljs-comment">// counter echoes the number of calls so far.</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">counter</span><span class="hljs-params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;<br>	mu.Lock()<br>	fmt.Fprintf(w, <span class="hljs-string">&quot;Count %d\n&quot;</span>, count)<br>	mu.Unlock()<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><img src="D:\Personal_Blog\hexo-blog\source_posts\GO学习笔记-1\Snipaste_2023-09-01_14-15-13.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/08/15/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/Snipaste_2023-09-01_14-15-13.png" srcset="/img/loading.gif" lazyload></p>
 <p>​		在这些代码的背后，服务器每一 次接收请求处理时都会另起一个<code>goroutine</code>，这样服务器就可以同一时间处理多个请求。在并发情况下，两个请求同一时刻去更新<code>count</code>，那么这个值可能并不会被正确地 增加；这个程序可能会引发一个严重的<code>bug</code>：竞态条件。</p>
 <p>​		<strong>为了避免这个问题，我们必须保证每次修改变量的最多只能有一个<code>goroutine</code>，这也就是代码里的<code>mu.Lock()</code>和 <code>mu.Unlock()</code>调用将修改<code>count</code>的所有行为包在中间的目的。</strong></p>
+<p>第一章的学习就到这里啦，入门了GO👍👍👍</p>
 
                 
               </div>
