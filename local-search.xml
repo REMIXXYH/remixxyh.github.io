@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>在实战中的fofa语法总结</title>
+    <link href="/2023/09/02/%E5%9C%A8%E5%AE%9E%E6%88%98%E4%B8%AD%E7%9A%84fofa%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/"/>
+    <url>/2023/09/02/%E5%9C%A8%E5%AE%9E%E6%88%98%E4%B8%AD%E7%9A%84fofa%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/</url>
+    
+    <content type="html"><![CDATA[<h2 id="FOFA使用技巧"><a href="#FOFA使用技巧" class="headerlink" title="FOFA使用技巧"></a>FOFA使用技巧</h2><h3 id="fofa"><a href="#fofa" class="headerlink" title="fofa"></a>fofa</h3><p>​FOFA 是白帽汇推出的一款网络空间搜索引擎,它通过进行网络空间测绘,能够帮助研究人员或者企业迅速进行网络资产匹配,例如进行漏洞影响范围分析、应用分布统计、应用流行度等。<br>FOFA 搜索引擎检索到的内容主要是服务器，数据库，某个网站管理后台，路由器，交换机，公共ip的打印机，网络摄像头，门禁系统，Web服务 ……<br>​FOFA 这类搜索引擎又有另一个名字：网络空间测绘系统。</p><p>​—— 它们就像是现实生活中的卫星地图那样，一点点勾勒出公共网络空间的样子，每一个网站、每一台公共环境下的服务器</p><p>​简单来说：<strong>专门用来找软柿子捏的搜索引擎！</strong>😂</p><h3 id="fofa语法"><a href="#fofa语法" class="headerlink" title="fofa语法"></a>fofa语法</h3><p>逻辑运算符包括：&#x3D; ，&#x3D;&#x3D;，!&#x3D; ，&amp;&amp;，||</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>SRC</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>SRC</tag>
+      
+      <tag>技巧</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>GO学习笔记-2</title>
     <link href="/2023/09/01/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/"/>
     <url>/2023/09/01/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/</url>
