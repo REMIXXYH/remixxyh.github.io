@@ -1,0 +1,749 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="3xsh0re">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="用Python编写了一个xx库查询小demo😘 **库查询小demo初衷和设计初衷就是说咱自己整理了一个excel文档，我想要像个专业人士去处理它🐸🐸 设计采用Python去写，库最多，写起来最顺畅哈哈，唯一不方便的就是打成exe有点大哈哈 用到的库： 123456import sysimport pandas as pd #处理excel文档import re# 图像界面from PyQt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Python编写一个社工库查询demo">
+<meta property="og:url" content="https://remixxyh.github.io/2023/09/05/%E7%94%A8Python%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E7%A4%BE%E5%B7%A5%E5%BA%93%E6%9F%A5%E8%AF%A2demo/index.html">
+<meta property="og:site_name" content="3xsh0re">
+<meta property="og:description" content="用Python编写了一个xx库查询小demo😘 **库查询小demo初衷和设计初衷就是说咱自己整理了一个excel文档，我想要像个专业人士去处理它🐸🐸 设计采用Python去写，库最多，写起来最顺畅哈哈，唯一不方便的就是打成exe有点大哈哈 用到的库： 123456import sysimport pandas as pd #处理excel文档import re# 图像界面from PyQt">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-05T15:19:44.000Z">
+<meta property="article:modified_time" content="2023-09-05T15:53:11.756Z">
+<meta property="article:author" content="3xsh0re">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="xx库">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>用Python编写一个社工库查询demo - 3xsh0re</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"remixxyh.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"vIkPGtXoC93i79dQ8HOxhY47-MdYXbMMI","app_key":"X45W6ylXfIClx5FtIsbKJsLb","server_url":"https://vikpgtxo.api.lncldglobal.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>3xsh0re&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="用Python编写一个社工库查询demo"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-05 23:19" pubdate>
+          2023年9月5日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          47 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">用Python编写一个社工库查询demo</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>用<code>Python</code>编写了一个xx库查询小demo😘</p>
+<h2 id="库查询小demo"><a href="#库查询小demo" class="headerlink" title="**库查询小demo"></a>**库查询小demo</h2><h3 id="初衷和设计"><a href="#初衷和设计" class="headerlink" title="初衷和设计"></a>初衷和设计</h3><h4 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h4><p>就是说咱自己整理了一个<code>excel</code>文档，我想要像个专业人士去处理它🐸🐸</p>
+<h4 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h4><p>采用<code>Python</code>去写，库最多，写起来最顺畅哈哈，唯一不方便的就是打成<code>exe</code>有点大哈哈</p>
+<p>用到的库：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd <span class="hljs-comment">#处理excel文档</span><br><span class="hljs-keyword">import</span> re<br><span class="hljs-comment"># 图像界面</span><br><span class="hljs-keyword">from</span> PyQt5.QtWidgets <span class="hljs-keyword">import</span> QApplication, QMainWindow, QLabel, QHBoxLayout, QVBoxLayout, QPushButton, QWidget, QLineEdit, QTableWidget, QTableWidgetItem, QHeaderView, QMessageBox<br><span class="hljs-keyword">from</span> PyQt5.QtGui <span class="hljs-keyword">import</span> QIcon, QPixmap, QFont<br></code></pre></td></tr></table></figure>
+
+<h3 id="编写过程中学到的知识"><a href="#编写过程中学到的知识" class="headerlink" title="编写过程中学到的知识"></a>编写过程中学到的知识</h3><h4 id="PyQT5使用"><a href="#PyQT5使用" class="headerlink" title="PyQT5使用"></a>PyQT5使用</h4><p>在使用定义一个图像界面时，最好是定义成一个类，然后在类里写处理函数，直接用<code>this</code>去处理，非常方便</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MainWindow</span>(<span class="hljs-title class_ inherited__">QMainWindow</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">super</span>().__init__()<br>        <span class="hljs-keyword">pass</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">handle_func</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="将Python程序打包成一个最小的exe"><a href="#将Python程序打包成一个最小的exe" class="headerlink" title="将Python程序打包成一个最小的exe"></a>将Python程序打包成一个最小的exe</h4><p>之前直接用电脑自带的<code>Python</code>环境打包，直接打了我400多<code>MB</code>，就离谱</p>
+<h3 id="贴上源代码"><a href="#贴上源代码" class="headerlink" title="贴上源代码"></a>贴上源代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> re<br><span class="hljs-keyword">from</span> PyQt5.QtWidgets <span class="hljs-keyword">import</span> QApplication, QMainWindow, QLabel, QHBoxLayout, QVBoxLayout, QPushButton, QWidget, QLineEdit, QTableWidget, QTableWidgetItem, QHeaderView, QMessageBox<br><span class="hljs-keyword">from</span> PyQt5.QtGui <span class="hljs-keyword">import</span> QIcon, QPixmap, QFont<br><br><span class="hljs-comment"># 读取社工库.xlxs文件</span><br>data_frame = pd.read_excel(<span class="hljs-string">&#x27;./src/basic_info.xlsx&#x27;</span>)<br><br><span class="hljs-comment"># 判断是人名还是手机号</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">judge_name_or_phone</span>(<span class="hljs-params">search_string</span>):<br>    <span class="hljs-comment"># 定义正则表达式</span><br>    <span class="hljs-comment"># 11位手机号</span><br>    pattern_phone = <span class="hljs-string">r&#x27;^\d&#123;11&#125;$&#x27;</span><br>    <span class="hljs-comment"># 纯中文字符和·</span><br>    pattern_name = <span class="hljs-string">r&#x27;^[\u4e00-\u9fa5·]+$&#x27;</span><br>    <span class="hljs-keyword">if</span> re.<span class="hljs-keyword">match</span>(pattern_name,search_string):<br>        <span class="hljs-comment"># 表示是人名查询</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>    <span class="hljs-keyword">elif</span> re.<span class="hljs-keyword">match</span>(pattern_phone,search_string):<br>        <span class="hljs-comment"># 表示是手机号查询</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">2</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-comment"># 不合法字符</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>    <br><span class="hljs-comment"># 定义窗口类</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MainWindow</span>(<span class="hljs-title class_ inherited__">QMainWindow</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">super</span>().__init__()<br><br>        self.setWindowTitle(<span class="hljs-string">&quot;Social-Work-Lib Search by 3xsh0re&quot;</span>)<br>        self.setGeometry(<span class="hljs-number">400</span>, <span class="hljs-number">100</span>, <span class="hljs-number">1200</span>, <span class="hljs-number">800</span>)<br>        self.setFixedSize(self.width(), self.height())<br><br>        <span class="hljs-comment"># 设置窗口背景图片</span><br>        background_image = QPixmap(<span class="hljs-string">&quot;src/background.jpeg&quot;</span>)<br>        background_label = QLabel(self)<br>        background_label.setPixmap(background_image)<br>        background_label.setGeometry(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1200</span>, <span class="hljs-number">800</span>)<br><br>        win_icon = QIcon(<span class="hljs-string">&quot;src/title.ico&quot;</span>)<br>        self.setWindowIcon(win_icon)<br><br>        layout = QVBoxLayout()<br><br>        <span class="hljs-comment"># 使用水平布局放置搜索框和按钮</span><br>        hbox = QHBoxLayout()<br><br>        <span class="hljs-comment"># 设置搜索框</span><br>        font_content = QFont(<span class="hljs-string">&quot;宋体&quot;</span>,<span class="hljs-number">11</span>)<br>        self.search_box = QLineEdit()<br>        self.search_box.setFont(font_content)<br>        self.search_box.setPlaceholderText(<span class="hljs-string">&quot;请输入人名或者手机号&quot;</span>)<br>        self.search_box.setStyleSheet(<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">            QLineEdit &#123; </span><br><span class="hljs-string">                border-radius: 13px; </span><br><span class="hljs-string">                border: 2px solid #4CAF50;</span><br><span class="hljs-string">                font-family: KaiTi;</span><br><span class="hljs-string">                padding: 8px;</span><br><span class="hljs-string">            &#125;</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>)<br>        hbox.addWidget(self.search_box)<br><br>        self.search_button = QPushButton(<span class="hljs-string">&quot;查询&quot;</span>)<br>        self.search_button.setStyleSheet(<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">            QPushButton &#123;</span><br><span class="hljs-string">                background-color: #4CAF50;</span><br><span class="hljs-string">                color: white;</span><br><span class="hljs-string">                border: none;</span><br><span class="hljs-string">                border-radius: 5px;</span><br><span class="hljs-string">                padding: 10px 20px;</span><br><span class="hljs-string">                font-family: SimSun;</span><br><span class="hljs-string">            &#125;</span><br><span class="hljs-string">            QPushButton:hover &#123;</span><br><span class="hljs-string">                background-color: #45a049;</span><br><span class="hljs-string">            &#125;</span><br><span class="hljs-string">            QPushButton:pressed &#123;</span><br><span class="hljs-string">                background-color: #398037;</span><br><span class="hljs-string">            &#125;</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>)<br>        self.search_button.clicked.connect(self.handle_search)<br>        hbox.addWidget(self.search_button)<br><br>        <span class="hljs-comment"># 将layout和hbox垂直布局</span><br>        layout.addLayout(hbox)<br><br>        <span class="hljs-comment"># 设置表格控件</span><br>        self.table_widget = QTableWidget()<br>        self.table_widget.setStyleSheet(<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">            QTableWidget &#123; </span><br><span class="hljs-string">                border: 6px solid #4CAF50;</span><br><span class="hljs-string">                border-radius: 14px; </span><br><span class="hljs-string">                font-family: KaiTi</span><br><span class="hljs-string">            &#125;</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>)<br>        self.table_widget.setColumnCount(<span class="hljs-number">5</span>)<br>        font = QFont(<span class="hljs-string">&quot;楷体&quot;</span>, <span class="hljs-number">15</span>, QFont.Bold)<br>        self.table_widget.setFont(font_content)<br>        self.table_widget.horizontalHeader().setFont(font)<br>        self.table_widget.setHorizontalHeaderLabels([<span class="hljs-string">&quot;姓名&quot;</span>, <span class="hljs-string">&quot;身份证号&quot;</span>, <span class="hljs-string">&quot;手机号&quot;</span>, <span class="hljs-string">&quot;住址&quot;</span>, <span class="hljs-string">&quot;邮箱&quot;</span>])<br>        self.table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)<br>        layout.addWidget(self.table_widget)<br><br>        central_widget = QWidget()<br>        central_widget.setLayout(layout)<br>        self.setCentralWidget(central_widget)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">handle_search</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-comment"># 获取搜索框内容</span><br>        search_string = self.search_box.text()<br>        results = search(search_string)<br>        <span class="hljs-keyword">if</span> results == <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> <span class="hljs-built_in">len</span>(results) == <span class="hljs-number">0</span>:<br>            self.table_widget.setRowCount(<span class="hljs-number">1</span>)<br>            self.table_widget.setItem(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, QTableWidgetItem(<span class="hljs-string">&quot;查不到哟~&quot;</span>))<br>            self.table_widget.setItem(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, QTableWidgetItem(<span class="hljs-string">&quot;可能名字输错^_^&quot;</span>))<br>            self.table_widget.setItem(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>, QTableWidgetItem(<span class="hljs-string">&quot;小库信息不多^&lt;&gt;^&quot;</span>))<br>            self.table_widget.setItem(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, QTableWidgetItem(<span class="hljs-string">&quot;手机号错了?&quot;</span>))<br>            self.table_widget.setItem(<span class="hljs-number">0</span>, <span class="hljs-number">4</span>, QTableWidgetItem(<span class="hljs-string">&quot;Sad~~~&quot;</span>))<br>        <span class="hljs-keyword">else</span>:<br>            self.table_widget.setRowCount(<span class="hljs-built_in">len</span>(results))<br>            num = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">for</span> info <span class="hljs-keyword">in</span> results:<br>                <span class="hljs-keyword">if</span> (num == <span class="hljs-built_in">len</span>(results)):<br>                    <span class="hljs-keyword">break</span><br>                self.table_widget.setItem(num, <span class="hljs-number">0</span>, QTableWidgetItem(<span class="hljs-built_in">str</span>(info[<span class="hljs-number">0</span>])))<br>                self.table_widget.setItem(num, <span class="hljs-number">1</span>, QTableWidgetItem(<span class="hljs-built_in">str</span>(info[<span class="hljs-number">1</span>])))<br>                self.table_widget.setItem(num, <span class="hljs-number">2</span>, QTableWidgetItem(<span class="hljs-built_in">str</span>(info[<span class="hljs-number">2</span>])))<br>                self.table_widget.setItem(num, <span class="hljs-number">3</span>, QTableWidgetItem(<span class="hljs-built_in">str</span>(info[<span class="hljs-number">3</span>])))<br>                self.table_widget.setItem(num, <span class="hljs-number">4</span>, QTableWidgetItem(<span class="hljs-built_in">str</span>(info[<span class="hljs-number">4</span>])))<br>                num+=<span class="hljs-number">1</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">search</span>(<span class="hljs-params">search_string</span>):<br>    <span class="hljs-comment"># 判断字符串是否合法</span><br>    flag = judge_name_or_phone(search_string)<br>    <span class="hljs-keyword">if</span> flag == <span class="hljs-number">1</span>:<br>        name_list = data_frame[<span class="hljs-string">&#x27;姓名&#x27;</span>]<br>        <span class="hljs-comment"># 获取行号</span><br>        results = name_list[name_list==search_string].index<br>        <span class="hljs-comment"># 获取行里的数据</span><br>        row_values = data_frame.iloc[results].values<br>        return_results = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(results)):<br>            return_results.append(row_values[i])<br>        <span class="hljs-keyword">return</span> return_results<br>    <span class="hljs-keyword">elif</span> flag == <span class="hljs-number">2</span>:<br>        <span class="hljs-comment"># 获取手机号列表</span><br>        phone_list = data_frame[<span class="hljs-string">&#x27;手机号&#x27;</span>]<br>        results = phone_list[phone_list==<span class="hljs-built_in">int</span>(search_string)].index<br>        <span class="hljs-comment"># 返回对应行号</span><br>        row_values = data_frame.iloc[results].values<br>        return_results = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(results)):<br>            return_results.append(row_values[i])<br>        <span class="hljs-keyword">return</span> return_results<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-keyword">try</span>:<br>        app = QApplication(sys.argv)<br>        window = MainWindow()<br>        window.show()<br>        sys.exit(app.exec_())<br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>        error_dialog = QMessageBox()<br>        error_dialog.setIcon(QMessageBox.Critical)<br>        error_dialog.setWindowTitle(<span class="hljs-string">&quot;错误&quot;</span>)<br>        error_dialog.setText(<span class="hljs-string">&quot;程序发生发生未知错误&quot;</span>)<br>        error_dialog.setInformativeText(<span class="hljs-built_in">str</span>(e))<br>        error_dialog.exec_()<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%B8%80%E4%BA%9B%E5%B0%8Fdemo/" class="category-chain-item">一些小demo</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/xx%E5%BA%93/" class="print-no-link">#xx库</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>用Python编写一个社工库查询demo</div>
+      <div>https://remixxyh.github.io/2023/09/05/用Python编写一个社工库查询demo/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>3xsh0re</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/" title="一次公益SRC挖掘-230903">
+                        <span class="hidden-mobile">一次公益SRC挖掘-230903</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"vIkPGtXoC93i79dQ8HOxhY47-MdYXbMMI","appKey":"X45W6ylXfIClx5FtIsbKJsLb","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/tororo.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
