@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>信息收集思路总结(持续完善)</title>
+    <link href="/2023/09/09/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E5%AE%8C%E5%96%84/"/>
+    <url>/2023/09/09/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E5%AE%8C%E5%96%84/</url>
+    
+    <content type="html"><![CDATA[<p>总结一些用到的信息收集手法🐸🐸🐸</p><span id="more"></span><h2 id="如何快速寻得目标的大量资产"><a href="#如何快速寻得目标的大量资产" class="headerlink" title="如何快速寻得目标的大量资产"></a>如何快速寻得目标的大量资产</h2><h3 id="子域名收集"><a href="#子域名收集" class="headerlink" title="子域名收集"></a>子域名收集</h3><h4 id="子域名挖掘机Layer"><a href="#子域名挖掘机Layer" class="headerlink" title="子域名挖掘机Layer"></a>子域名挖掘机Layer</h4><p>将主域名输入即可使用，字典很大，爆破效率也挺高的，支持导出为<code>txt</code>文件，蛮方便的</p><p><img src="/2023/09/09/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E5%AE%8C%E5%96%84/Snipaste_2023-09-09_20-01-40.png"></p><h3 id="存活探测"><a href="#存活探测" class="headerlink" title="存活探测"></a>存活探测</h3><h4 id="Finger"><a href="#Finger" class="headerlink" title="Finger"></a>Finger</h4><p>蛮好用的一个对大量资产进行存活探测的脚本，最后会输出一个表格文件</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">python Finger.py -f ./test.txt<br></code></pre></td></tr></table></figure><p><img src="/2023/09/09/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E5%AE%8C%E5%96%84/Snipaste_2023-09-09_20-26-03.png"></p><h4 id="observer-ward"><a href="#observer-ward" class="headerlink" title="observer_ward"></a>observer_ward</h4><p>团队开发的工具，支持的参数比较多一点，闭源，扫描的要慢一点，但是细节更多，还会自动划分优先级，也蛮好用的</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">.\observer_ward.exe -f ..\Finger-main\chehejia.com.txt<br></code></pre></td></tr></table></figure><p><img src="/2023/09/09/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E5%AE%8C%E5%96%84/Snipaste_2023-09-09_20-36-39.png"></p><p><img src="/2023/09/09/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E5%AE%8C%E5%96%84/Snipaste_2023-09-09_20-36-50.png"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>SRC</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>SRC</tag>
+      
+      <tag>技巧</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>用Python编写一个xx库查询demo</title>
     <link href="/2023/09/05/%E7%94%A8Python%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAxx%E5%BA%93%E6%9F%A5%E8%AF%A2demo/"/>
     <url>/2023/09/05/%E7%94%A8Python%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAxx%E5%BA%93%E6%9F%A5%E8%AF%A2demo/</url>
