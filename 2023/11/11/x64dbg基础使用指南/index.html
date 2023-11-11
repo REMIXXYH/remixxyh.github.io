@@ -1,0 +1,808 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="3xsh0re">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="x64dbg的基本使用指南本篇是为了配合读书笔记，因为原书使用的都是32位的程序，但是目前都是x86-64的机器，所以就学习一下x64dbg。 在52的帖子里看到的一句话，现在还理解不透彻：破解的关键在于找到关键CALL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="x64dbg基础使用指南">
+<meta property="og:url" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="3xsh0re">
+<meta property="og:description" content="x64dbg的基本使用指南本篇是为了配合读书笔记，因为原书使用的都是32位的程序，但是目前都是x86-64的机器，所以就学习一下x64dbg。 在52的帖子里看到的一句话，现在还理解不透彻：破解的关键在于找到关键CALL">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_10-35-39.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_10-38-21.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_10-44-43.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_10-48-49.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_10-55-47.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_10-59-28.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_11-03-29.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_13-49-32.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_13-54-15.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_13-56-18.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_14-10-08.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_14-40-13.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_14-44-13.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_14-48-38.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_14-49-50.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_15-06-36.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_15-08-34.png">
+<meta property="article:published_time" content="2023-11-11T08:37:26.000Z">
+<meta property="article:modified_time" content="2023-11-11T08:41:28.159Z">
+<meta property="article:author" content="3xsh0re">
+<meta property="article:tag" content="软件与系统安全">
+<meta property="article:tag" content="逆向工具">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://remixxyh.github.io/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_10-35-39.png">
+  
+  
+  
+  <title>x64dbg基础使用指南 - 3xsh0re</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"remixxyh.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"vIkPGtXoC93i79dQ8HOxhY47-MdYXbMMI","app_key":"X45W6ylXfIClx5FtIsbKJsLb","server_url":"https://vikpgtxo.api.lncldglobal.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>3xsh0re&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="x64dbg基础使用指南"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-11 16:37" pubdate>
+          2023年11月11日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">x64dbg基础使用指南</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="x64dbg的基本使用指南"><a href="#x64dbg的基本使用指南" class="headerlink" title="x64dbg的基本使用指南"></a>x64dbg的基本使用指南</h2><p>本篇是为了配合读书笔记，因为原书使用的都是32位的程序，但是目前都是x86-64的机器，所以就学习一下x64dbg。</p>
+<p>在52的帖子里看到的一句话，现在还理解不透彻：<strong>破解的关键在于找到关键CALL</strong></p>
+<span id="more"></span>
+
+<p>本文参考文章：<a target="_blank" rel="noopener" href="https://www.52pojie.cn/forum.php?mod=viewthread&tid=1393075">1</a>，<a target="_blank" rel="noopener" href="https://www.cnblogs.com/meowv/p/11428772.html">2</a></p>
+<p>X64dbg更新很快，但作者对于帮助文档却惜墨如金，有很多实用的强大功能，都需要自己去摸索。<br>刚才提到寻找关键CALL，IDA虽然F5生成伪码功能强大，并且可以生成函数调用图，但对于复杂的调用看起来就很不直观。并且IDA只能单个文件静态分析，对于跨模块调用就无能为力。</p>
+<h3 id="符号文件"><a href="#符号文件" class="headerlink" title="符号文件"></a>符号文件</h3><h4 id="什么是符号文件-pdb"><a href="#什么是符号文件-pdb" class="headerlink" title="什么是符号文件.pdb"></a>什么是符号文件.pdb</h4><p>​	符号文件（Symbol Files）是一个数据信息文件。 它包含了应用程序二进制文件（比如：EXE、DLL等）调试信息，专门用来作调试之用，最终生成的可执行文件在运行时并不需要这个符号文件，但<strong>你的程序中所有的变量信息都记录在这个文件中。 所以调试应用程序时，这个文件是非常重要的</strong>。</p>
+<h4 id="设置符号文件保存路径"><a href="#设置符号文件保存路径" class="headerlink" title="设置符号文件保存路径"></a>设置符号文件保存路径</h4><p>​	符号文件通常很大，所以x64dbg自身不带有符号文件，需要自己手动下载和保存，但是默认设置相对路径不太方便，如果下载过符号文件，就会在同一文件夹下生成symbols文件夹，这样在x64dbg升级或者更换的时候非常不方便，所以自己新建一个专门的比较好</p>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_10-35-39.png" srcset="/img/loading.gif" lazyload></p>
+<p>在选项中，杂项，设置本地符号路径</p>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_10-38-21.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="使用符号文件"><a href="#使用符号文件" class="headerlink" title="使用符号文件"></a>使用符号文件</h4><p>很多情况下，x64dbg不会自动加载符号文件，大概率是防止同时加载过多导致程序崩溃，这时候就需要我们手动加载了</p>
+<p>首先需要下载符号文件，打开符号页面，右键.dll，可以发现有下载选项，点击下载即可，但是由于是默认加载微软的符号服务器，所以建议打开代理下载😋</p>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_10-44-43.png" srcset="/img/loading.gif" lazyload></p>
+<p>这里也可以选择下载所有dll的符号，下载到我们之前设置的文件夹下😁</p>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_10-48-49.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>通常打开一个程序的界面分为4块：</p>
+<p>反汇编，寄存器，内存，系统栈</p>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_10-55-47.png" srcset="/img/loading.gif" lazyload></p>
+<p>关于调试按钮，就自己看咯，在左上角那里，应该比较好理解的</p>
+<h4 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h4><p>搜索字符串：右键汇编代码区，搜索，选择搜索模块，选择搜索内容，单步运行到这里搜索当前模块的字符串内容结果，当然这个感觉没有IDA的好用😁，所以我一般是两个一起看</p>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_10-59-28.png" srcset="/img/loading.gif" lazyload></p>
+<p>双击就可以到字符串在反汇编处</p>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_11-03-29.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="编辑字符串"><a href="#编辑字符串" class="headerlink" title="编辑字符串"></a>编辑字符串</h4><p>下面学习如何修改字符串常量，首先在反汇编窗口定位到字符串位置，然后在该句信息的窗口双击虚拟内存地址，会x64dbg在内存窗口自动给你跳转到对应位置，</p>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_13-49-32.png" srcset="/img/loading.gif" lazyload></p>
+<p>用鼠标选中需要编辑的位置，右键打开二进制编辑器</p>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_13-54-15.png" srcset="/img/loading.gif" lazyload></p>
+<p>可以发现如果没有修改到原字符串的大小，是不会覆盖的，</p>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_13-56-18.png" srcset="/img/loading.gif" lazyload></p>
+<p>关于这里为什么能在反汇编中动态改变，是因为反汇编区域默认是将在内存中内容读取并解析成相关的汇编代码</p>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_14-10-08.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="一些配置"><a href="#一些配置" class="headerlink" title="一些配置"></a>一些配置</h4><p>在选项中，会有一些配置更改的设置，现在我们来看一看</p>
+<ul>
+<li>事件：就是x64dbg自动暂停的事件，这里也解释了我在阅读笔记1中的疑问，为什么会自动暂停，因为我之前安装的时候勾选了系统断点🤣，这里我们改回去，只保留在入口断点暂停</li>
+</ul>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_14-40-13.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>对于引擎和异常保持默认即可</li>
+<li>反汇编：我这里仅修改了图中三处</li>
+</ul>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_14-44-13.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>杂项：可以将搜索引擎改为百度：<a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=@topic">https://www.baidu.com/s?wd=@topic</a>  遇到不认识的函数选中，右键，符号名称帮助，直接进行查询。</li>
+</ul>
+<h4 id="计算器"><a href="#计算器" class="headerlink" title="计算器"></a>计算器</h4><p>在帮助里面</p>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_14-48-38.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="显示指令提示"><a href="#显示指令提示" class="headerlink" title="显示指令提示"></a>显示指令提示</h4><p>右键反汇编区，选择显示提示或隐藏</p>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_14-49-50.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h4><p>右键汇编区代码，然后选择补丁，修补文件即可发布crack版本，注意不要和源文件重名，快捷键Ctrl+P</p>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_15-06-36.png" srcset="/img/loading.gif" lazyload></p>
+<p>可以发现已经修改了字符串</p>
+<p><img src="/2023/11/11/x64dbg%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/Snipaste_2023-11-11_15-08-34.png" srcset="/img/loading.gif" lazyload></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" class="category-chain-item">工具使用</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%BD%AF%E4%BB%B6%E4%B8%8E%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/" class="print-no-link">#软件与系统安全</a>
+      
+        <a href="/tags/%E9%80%86%E5%90%91%E5%B7%A5%E5%85%B7/" class="print-no-link">#逆向工具</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>x64dbg基础使用指南</div>
+      <div>https://remixxyh.github.io/2023/11/11/x64dbg基础使用指南/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>3xsh0re</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年11月11日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/26/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%941/" title="0Day安全软件漏洞分析第2版阅读随笔1">
+                        <span class="hidden-mobile">0Day安全软件漏洞分析第2版阅读随笔1</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"vIkPGtXoC93i79dQ8HOxhY47-MdYXbMMI","appKey":"X45W6ylXfIClx5FtIsbKJsLb","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/tororo.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
