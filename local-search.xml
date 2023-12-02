@@ -276,58 +276,6 @@
   
   
   <entry>
-    <title>在实战中的fofa语法总结</title>
-    <link href="/2023/09/02/%E5%9C%A8%E5%AE%9E%E6%88%98%E4%B8%AD%E7%9A%84fofa%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/"/>
-    <url>/2023/09/02/%E5%9C%A8%E5%AE%9E%E6%88%98%E4%B8%AD%E7%9A%84fofa%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/</url>
-    
-    <content type="html"><![CDATA[<p>老是在用，就总结一下啦</p><span id="more"></span><h2 id="FOFA使用技巧"><a href="#FOFA使用技巧" class="headerlink" title="FOFA使用技巧"></a>FOFA使用技巧</h2><h3 id="fofa"><a href="#fofa" class="headerlink" title="fofa"></a>fofa</h3><p>​FOFA 是白帽汇推出的一款网络空间搜索引擎,它通过进行网络空间测绘,能够帮助研究人员或者企业迅速进行网络资产匹配,例如进行漏洞影响范围分析、应用分布统计、应用流行度等。<br>FOFA 搜索引擎检索到的内容主要是服务器，数据库，某个网站管理后台，路由器，交换机，公共ip的打印机，网络摄像头，门禁系统，Web服务 ……<br>​FOFA 这类搜索引擎又有另一个名字：网络空间测绘系统。</p><p>​—— 它们就像是现实生活中的卫星地图那样，一点点勾勒出公共网络空间的样子，每一个网站、每一台公共环境下的服务器</p><p>​简单来说：<strong>专门用来找软柿子捏的搜索引擎！</strong>😂</p><h3 id="fofa语法"><a href="#fofa语法" class="headerlink" title="fofa语法"></a>fofa语法</h3><p>逻辑运算符包括：&#x3D; ，&#x3D;&#x3D;，!&#x3D; ，&amp;&amp;，||</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>SRC</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>SRC</tag>
-      
-      <tag>技巧</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>GO学习笔记-2</title>
-    <link href="/2023/09/01/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/"/>
-    <url>/2023/09/01/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/</url>
-    
-    <content type="html"><![CDATA[<p>跟着《GO圣经》学习GO啦！</p><span id="more"></span><h2 id="开始GO-——Part2"><a href="#开始GO-——Part2" class="headerlink" title="开始GO!——Part2"></a>开始GO!——Part2</h2><p>笔者跟着《Go语言圣经》一起学习的~~😘</p><p>对应第二章</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>Golang</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Golang</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>一次eduSRC挖掘-230827</title>
     <link href="/2023/08/31/%E4%B8%80%E6%AC%A1eduSRC%E6%8C%96%E6%8E%98-230827/"/>
     <url>/2023/08/31/%E4%B8%80%E6%AC%A1eduSRC%E6%8C%96%E6%8E%98-230827/</url>
@@ -418,7 +366,7 @@
     
     <categories>
       
-      <category>Golang</category>
+      <category>读书笔记</category>
       
     </categories>
     
@@ -427,32 +375,7 @@
       
       <tag>Golang</tag>
       
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>重新学习SQL注入</title>
-    <link href="/2023/08/15/%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0SQL%E6%B3%A8%E5%85%A5/"/>
-    <url>/2023/08/15/%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0SQL%E6%B3%A8%E5%85%A5/</url>
-    
-    <content type="html"><![CDATA[<p>根本学不会哈哈</p><span id="more"></span><h1 id="实战中的SQL注入"><a href="#实战中的SQL注入" class="headerlink" title="实战中的SQL注入"></a>实战中的SQL注入</h1><h3 id="学会使用sqlmap"><a href="#学会使用sqlmap" class="headerlink" title="学会使用sqlmap"></a>学会使用sqlmap</h3><p>。。。</p><h3 id="实战用的SQL注入"><a href="#实战用的SQL注入" class="headerlink" title="实战用的SQL注入"></a>实战用的SQL注入</h3><h4 id="记录一次完整地利用SQL注入（Nday，拿来练手）"><a href="#记录一次完整地利用SQL注入（Nday，拿来练手）" class="headerlink" title="记录一次完整地利用SQL注入（Nday，拿来练手）"></a>记录一次完整地利用SQL注入（Nday，拿来练手）</h4><p>选出数据库名：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">selec database()<br></code></pre></td></tr></table></figure><p><img src="/2023/08/15/%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0SQL%E6%B3%A8%E5%85%A5/Snipaste_2023-09-08_21-34-37.png"></p><p>选出表名：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select table_name from information_schema.tables where table_schema=&#x27;mysql3235&#x27; <br></code></pre></td></tr></table></figure><p><img src="/2023/08/15/%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0SQL%E6%B3%A8%E5%85%A5/Snipaste_2023-09-08_21-40-47.png"></p><p>选一个表获取其字段名：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> column_name <span class="hljs-keyword">from</span> information_schema.columns <span class="hljs-keyword">where</span> table_name<span class="hljs-operator">=</span><span class="hljs-string">&#x27;act_tac_rel&#x27;</span><br></code></pre></td></tr></table></figure><p><img src="/2023/08/15/%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0SQL%E6%B3%A8%E5%85%A5/Snipaste_2023-09-08_21-43-30.png"></p><p>刚刚的表里没有内容，换一个<code>department</code>表</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> NAME <span class="hljs-keyword">from</span> department<br></code></pre></td></tr></table></figure><p><img src="/2023/08/15/%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0SQL%E6%B3%A8%E5%85%A5/Snipaste_2023-09-08_21-51-33.png"></p><p>上面就是普通流程全部走了一遍😎😎😎</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>web安全</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>web安全</tag>
-      
-      <tag>SQL注入</tag>
+      <tag>读书笔记</tag>
       
     </tags>
     
@@ -1005,7 +928,7 @@
     <link href="/2023/08/08/Hello!/"/>
     <url>/2023/08/08/Hello!/</url>
     
-    <content type="html"><![CDATA[<h2 id="欢迎来到3xsh0re的博客"><a href="#欢迎来到3xsh0re的博客" class="headerlink" title="欢迎来到3xsh0re的博客"></a>欢迎来到3xsh0re的博客</h2><span id="more"></span><p>我是一个网络安全行业的初学者，在这里我会更新自己的学习动态，如果你偶然翻到，那说明我们一定很有缘分哦！😘😘</p><p>​在这里，我会更新渗透测试、SRC挖掘、web安全的一些内容，希望自己可以持之以恒的学习下去，加油！！！😎👍</p><p><img src="/2023/08/08/Hello!/Pikachu.png"></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="欢迎来到3xsh0re的博客"><a href="#欢迎来到3xsh0re的博客" class="headerlink" title="欢迎来到3xsh0re的博客"></a>欢迎来到3xsh0re的博客</h2><span id="more"></span><p>我是一个网络安全行业的初学者，在这里我会更新自己的学习动态，如果你偶然翻到，那说明我们一定很有缘分哦！😘😘</p><p>​在这里，我会更新渗透测试、SRC挖掘、web安全、逆向分析、二进制安全的一些内容，希望自己可以持之以恒的学习下去，加油！！！😎👍</p><p><img src="/2023/08/08/Hello!/Pikachu.png"></p>]]></content>
     
     
     
