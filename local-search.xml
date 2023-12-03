@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>在Kali下快速配置一个pwn环境</title>
+    <link href="/2023/12/03/%E5%9C%A8Kali%E4%B8%8B%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AApwn%E7%8E%AF%E5%A2%83/"/>
+    <url>/2023/12/03/%E5%9C%A8Kali%E4%B8%8B%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AApwn%E7%8E%AF%E5%A2%83/</url>
+    
+    <content type="html"><![CDATA[<h2 id="在Kali下快速配置一个简单的PWN环境"><a href="#在Kali下快速配置一个简单的PWN环境" class="headerlink" title="在Kali下快速配置一个简单的PWN环境"></a>在Kali下快速配置一个简单的PWN环境</h2><p>多次搭建了，但是忘性太大了每次都去搜索，感觉很慢，所以就自己写一个集中一点🤣</p><span id="more"></span><h3 id="Kali下载"><a href="#Kali下载" class="headerlink" title="Kali下载"></a>Kali下载</h3><p>官网下载实在是太慢了，所以我选择百度网盘，因为我是会员😎</p><p>这里贴上我的网盘链接：<a href="https://pan.baidu.com/s/1UP7BzYkHBv54v3_bZjWmxQ">Kali-Liunx-2023.3-VM</a></p><p>提取码：xiyq</p><p>然后VM里打开就OK了，然后就入，默认账密：kali&#x2F;kali</p><h3 id="root-换源"><a href="#root-换源" class="headerlink" title="root&amp;&amp;换源"></a>root&amp;&amp;换源</h3><h4 id="root"><a href="#root" class="headerlink" title="root"></a>root</h4><p>进去之后当然不是root权限，当然不爽啦吗，右键打开终端，然后输入kali的密码kali，切换到root用户，修改root用户密码，然后重启以root身份登入</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">su root<br>passwd<br>reboot<br></code></pre></td></tr></table></figure><h4 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h4><p>然后就是换源，一个是apt源，一个是pip源</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs sh">//换apt源<br>vim /etc/apt/sources.list<br>//deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free<br>apt-get update<br>apt-get upgrade<br>//换pip源<br><span class="hljs-built_in">cd</span> ~<br><span class="hljs-built_in">mkdir</span> .pip<br><span class="hljs-built_in">cd</span> .pip<br>vim pip.conf<br>/*<br>[global]<br><span class="hljs-built_in">timeout</span> = 6000<br>index-url = https://pypi.tuna.tsinghua.edu.cn/simple/<br>[install]<br>trusted-host=https://pypi.tuna.tsinghua.edu.cn<br>*/<br></code></pre></td></tr></table></figure><p><img src="/2023/12/03/%E5%9C%A8Kali%E4%B8%8B%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AApwn%E7%8E%AF%E5%A2%83/Snipaste_2023-12-03_22-00-47.png"></p><p><img src="/2023/12/03/%E5%9C%A8Kali%E4%B8%8B%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AApwn%E7%8E%AF%E5%A2%83/Snipaste_2023-12-03_22-01-46.png"></p><h3 id="pwntools"><a href="#pwntools" class="headerlink" title="pwntools"></a>pwntools</h3><p>安装pwntools，在本kali下是python3了，所以其实是安装pwn库</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pip install pwn<br></code></pre></td></tr></table></figure><p>没啥问题</p><p><img src="/2023/12/03/%E5%9C%A8Kali%E4%B8%8B%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AApwn%E7%8E%AF%E5%A2%83/Snipaste_2023-12-03_21-58-31.png"></p><h3 id="pwngdb"><a href="#pwngdb" class="headerlink" title="pwngdb"></a>pwngdb</h3><p>安装pwndbg，pwndbg其实是原生gdb的一个插件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~<br><span class="hljs-built_in">mkdir</span> pwn<br><span class="hljs-built_in">cd</span> pwn<br>git <span class="hljs-built_in">clone</span> https://github.com/pwndbg/pwndbg<br><span class="hljs-built_in">cd</span> pwndbg<br>./setup.sh<br>gdb<br></code></pre></td></tr></table></figure><p>安装完即可！😀</p><p><img src="/2023/12/03/%E5%9C%A8Kali%E4%B8%8B%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AApwn%E7%8E%AF%E5%A2%83/Snipaste_2023-12-03_22-00-12.png"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>工具使用</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>软件与系统安全</tag>
+      
+      <tag>pwn</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>0Day安全软件漏洞分析第2版阅读随笔2</title>
     <link href="/2023/12/02/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%942/"/>
     <url>/2023/12/02/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%942/</url>
