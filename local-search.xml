@@ -130,8 +130,6 @@
       
       <tag>实习</tag>
       
-      <tag>HVV</tag>
-      
     </tags>
     
   </entry>
@@ -155,9 +153,7 @@
     
     <tags>
       
-      <tag>WP</tag>
-      
-      <tag>CTF-RE</tag>
+      <tag>CTF</tag>
       
     </tags>
     
@@ -182,9 +178,7 @@
     
     <tags>
       
-      <tag>WP</tag>
-      
-      <tag>CTF-WEB</tag>
+      <tag>CTF</tag>
       
     </tags>
     
@@ -229,16 +223,16 @@
     
     <categories>
       
-      <category>一些小demo</category>
+      <category>工具编写</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>Python</tag>
+      <tag>工具编写</tag>
       
-      <tag>xx库</tag>
+      <tag>社工库</tag>
       
     </tags>
     
@@ -266,8 +260,6 @@
       <tag>SRC</tag>
       
       <tag>SQL注入</tag>
-      
-      <tag>RCE</tag>
       
     </tags>
     
