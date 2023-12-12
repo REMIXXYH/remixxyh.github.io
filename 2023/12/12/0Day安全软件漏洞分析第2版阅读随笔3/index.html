@@ -1,0 +1,790 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="3xsh0re">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="0Day安全软件漏洞分析第2版阅读随笔3​	开启第三章的阅读，在第二章学习了基本的栈溢出原理之后，我们已经调试过如何在缓冲区植入代码了，那么接下来将继续学习如何更专业地植入代码，或者说开发shellcode😋">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0Day安全软件漏洞分析第2版阅读随笔3">
+<meta property="og:url" content="https://remixxyh.github.io/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/index.html">
+<meta property="og:site_name" content="3xsh0re">
+<meta property="og:description" content="0Day安全软件漏洞分析第2版阅读随笔3​	开启第三章的阅读，在第二章学习了基本的栈溢出原理之后，我们已经调试过如何在缓冲区植入代码了，那么接下来将继续学习如何更专业地植入代码，或者说开发shellcode😋">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://remixxyh.github.io/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_18-40-46.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_16-27-19.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_18-37-55.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_18-58-55.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_18-59-11.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_19-02-55.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_21-56-12.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_21-46-58.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_21-50-02.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_21-52-35.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_21-57-18.png">
+<meta property="og:image" content="https://remixxyh.github.io/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_22-03-42.png">
+<meta property="article:published_time" content="2023-12-12T14:58:29.000Z">
+<meta property="article:modified_time" content="2023-12-12T15:00:18.953Z">
+<meta property="article:author" content="3xsh0re">
+<meta property="article:tag" content="读书笔记">
+<meta property="article:tag" content="软件与系统安全">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://remixxyh.github.io/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_18-40-46.png">
+  
+  
+  
+  <title>0Day安全软件漏洞分析第2版阅读随笔3 - 3xsh0re</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"remixxyh.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"vIkPGtXoC93i79dQ8HOxhY47-MdYXbMMI","app_key":"X45W6ylXfIClx5FtIsbKJsLb","server_url":"https://vikpgtxo.api.lncldglobal.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>3xsh0re&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/an1.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="0Day安全软件漏洞分析第2版阅读随笔3"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-12 22:58" pubdate>
+          2023年12月12日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">0Day安全软件漏洞分析第2版阅读随笔3</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="0Day安全软件漏洞分析第2版阅读随笔3"><a href="#0Day安全软件漏洞分析第2版阅读随笔3" class="headerlink" title="0Day安全软件漏洞分析第2版阅读随笔3"></a>0Day安全软件漏洞分析第2版阅读随笔3</h1><p>​	开启第三章的阅读，在第二章学习了基本的栈溢出原理之后，我们已经调试过如何在缓冲区植入代码了，那么接下来将继续学习如何更专业地植入代码，或者说开发<code>shellcode</code>😋</p>
+<span id="more"></span>
+
+<h2 id="第三章-开发shellcode的艺术"><a href="#第三章-开发shellcode的艺术" class="headerlink" title="第三章-开发shellcode的艺术"></a>第三章-开发shellcode的艺术</h2><p>​	<code>shellcode</code>这个专用术语来通称缓冲区溢出攻击中植入进程的代码。这 段代码可以是出于恶作剧目的的弹出一个消息框，也可以是出于攻击目的的删改重要文件、窃取 数据、上传木马病毒并运行，甚至是出于破坏目的的格式化硬盘等。请注意本章讨论的<code>shellcode</code>是这种广义上的植入进程的代码，而不是狭义上的仅仅用来获得 <code>shell</code>的代码。</p>
+<p>​	我们还会经常看到另一个术语——<code>exploit</code>。 植入代码之前需要做大量的调试工作，例如，弄清楚程序有几个输入点，这些输入将最终 会当作哪个函数的第几个参数读入到内存的哪一个区域，哪一个输入会造成栈溢出，在复制到栈区的时候对这些数据有没有额外的限制等。调试之后还要计算函数返回地址距离缓冲区的偏 移并淹没之，选择指令的地址，最终制作出一个有攻击效果的“承载”着<code>shellcode</code>的输入字符 串。这个代码植入的过程就是漏洞利用，也就是<code>exploit</code>。<code>exploit</code>一般以一段代码的形式出现，用于生成攻击性的网络数据包或者其他形式的攻击性 输入。<code>expliot</code>的核心是淹没返回地址，劫持进程的控制权，之后跳转去执行<code>shellcode</code>。与<code>shellcode</code>具有一定的通用性不同，<code>exploit</code>往往是针对特定漏洞而言的。</p>
+<p>比如我们在第二章里写的代码：</p>
+<p><img src="/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_18-40-46.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="开发shellcode需要解决的问题"><a href="#开发shellcode需要解决的问题" class="headerlink" title="开发shellcode需要解决的问题"></a>开发shellcode需要解决的问题</h3><p>​	通过上面的介绍，你应该已经明白了什么是<code>shellcode</code>，正是我们在第二章植入的那段机器码。在第二章的植入代码部分，我们是通过手动查找得到函数调用的地址以及函数返回地址，这显然不是通用的。加之，当存在缺陷的函数处于<code>ddl</code>中，并且被程序动态装载，地址每次都存在变化，这时就需要我们找到一种方式，使得能够自动定位到<code>shellcode</code>的地址。</p>
+<h3 id="定位shellcode"><a href="#定位shellcode" class="headerlink" title="定位shellcode"></a>定位shellcode</h3><h4 id="栈帧移位与jmp-esp"><a href="#栈帧移位与jmp-esp" class="headerlink" title="栈帧移位与jmp esp"></a>栈帧移位与jmp esp</h4><p>关于栈帧移位，笔者在这里不太了解实际的过程，暂且记下，现在只关注如何动态定位。</p>
+<p><img src="/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_16-27-19.png" srcset="/img/loading.gif" lazyload></p>
+<p>​	通过前两章的调试，我们其实已经很清楚指令执行和栈变化的过程，可以发现的是，每次函数调用完成之前，都会将之前减去的栈偏移加回来，所以我们可以发现，此时<code>esp</code>(64位下<code>rsp</code>)寄存器的内容正好在我们的返回地址的下一个位置，注意这里指的是栈上返回地址对应的地方，<code>esp</code>是栈帧指针。</p>
+<p>​	所以动态定位不就可以实现了，我们在系统找到一个<code>jmp rsp</code>指令的地址，然后在返回地址处填上这个地址，那么之后就会执行这个指令跳转到当前<code>rsp</code>存放的地址，也就是栈上淹没返回地址处后一个位置<code>shellcode</code>就在这之后执行。</p>
+<p>所以重新的规划大概如下图：</p>
+<p><img src="/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_18-37-55.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="x64dbg如何搜索跳板指令位置"><a href="#x64dbg如何搜索跳板指令位置" class="headerlink" title="x64dbg如何搜索跳板指令位置"></a>x64dbg如何搜索跳板指令位置</h4><p>笔者之前已经提到，我是在64位机器上进行的操作，所以只能采用x64dbg，没有使用书里的OD，暂时没有找到什么好用的插件可以之间定位到我们需要的<code>dll</code>库中的跳板位置，所以这里我采用原始的搜索方式。</p>
+<p>直接右键搜索命令：<code>jmp rsp</code></p>
+<p><img src="/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_18-58-55.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_18-59-11.png" srcset="/img/loading.gif" lazyload></p>
+<p>这里我就直接采用了第一个地址<code>00007FFC81014A53</code>，在内存布局中找到，确认是系统模块</p>
+<p><img src="/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_19-02-55.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="crack-me5"><a href="#crack-me5" class="headerlink" title="crack_me5"></a>crack_me5</h4><p>程序和crack_me4是一样的，只是我们要改变我们的劫持流程。</p>
+<p>首先我们已经获取到了跳板地址，在上面，由于是系统模块，所以一般还是不会变的。然后找到<code>MessageBoxA</code>函数的地址，采用读书笔记2的方法。</p>
+<p>可以发现这次的地址改变了，说明确实是动态加载的，所以这里应该有个疑问<code>MessageBoxA</code>的地址怎么动态获取，笔者在这里还不知道具体的解决方案。查到是<code>00007FFC8361A000</code>，查到ExitProcess函数的地址为<code>00007FFC82DEE3B0</code></p>
+<p>下面制作我们所说的<code>exploit</code>：在之前的基础上加入了退出调用</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dns"><span class="hljs-number">3132333435363738313233343536373831323334353637383132333435363738313233343536373831323334353637383132333435363738534</span>A0181FC7F11114883EC4833DB5348B82165723068737833508BC45350505348B8A06183FC7F11111148C1E01848C1E810FFD04883C44848B8B0E3DE82FC7F111148C1E01048C1E810FFD<span class="hljs-number">04883C448</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_21-56-12.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后进行调试过程：</p>
+<p>我们在<code>strcpy</code>函数调用之后那个地方打断点，直接运行到那个地方，这里因为防止截断，我将64位中的0换为了1，然后在此时修改栈上的数据，目前没有找到更好的解决办法</p>
+<p><img src="/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_21-46-58.png" srcset="/img/loading.gif" lazyload></p>
+<p>已经跳转到了我们的跳板地址</p>
+<p><img src="/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_21-50-02.png" srcset="/img/loading.gif" lazyload></p>
+<p>这里参考读书笔记2，修改一下在栈上的执行权限，继续步进</p>
+<p>可以发现已经如我们分析的那样，跳转回到了我们布置好的<code>shellcode</code>处</p>
+<p><img src="/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_21-52-35.png" srcset="/img/loading.gif" lazyload></p>
+<p>正常跳转到弹窗函数：</p>
+<p><img src="/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_21-57-18.png" srcset="/img/loading.gif" lazyload></p>
+<p>可以发现已经跳到退出函数的地方</p>
+<p><img src="/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/Snipaste_2023-12-12_22-03-42.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后就可以正常退出了，虽然不知道为何不能弹窗。唉</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="category-chain-item">读书笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="print-no-link">#读书笔记</a>
+      
+        <a href="/tags/%E8%BD%AF%E4%BB%B6%E4%B8%8E%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/" class="print-no-link">#软件与系统安全</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>0Day安全软件漏洞分析第2版阅读随笔3</div>
+      <div>https://remixxyh.github.io/2023/12/12/0Day安全软件漏洞分析第2版阅读随笔3/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>3xsh0re</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年12月12日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/09/HTTPS%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%97%E8%AE%A4%E8%AF%81%E5%8E%9F%E7%90%86/" title="HTTPS中的数字认证原理">
+                        <span class="hidden-mobile">HTTPS中的数字认证原理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"OYnUsPOOxWtnPXQH1Dxz9wjM-gzGzoHsz","appKey":"GoMWtP1iHSKKpwsbzBlVqJ7P","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/tororo.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
