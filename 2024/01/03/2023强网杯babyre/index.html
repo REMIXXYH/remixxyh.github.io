@@ -1,0 +1,831 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="3xsh0re">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="这道题比赛的时候做了半天也没有做出了，加密部分倒是搞懂了，就是得不到正确的flag，后来看来题解才知道自己的路还有很长">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2023强网杯babyre">
+<meta property="og:url" content="https://remixxyh.github.io/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/index.html">
+<meta property="og:site_name" content="3xsh0re">
+<meta property="og:description" content="这道题比赛的时候做了半天也没有做出了，加密部分倒是搞懂了，就是得不到正确的flag，后来看来题解才知道自己的路还有很长">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://remixxyh.github.io/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2024-01-01_15-20-48.png">
+<meta property="og:image" content="https://remixxyh.github.io/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2024-01-01_21-49-41.png">
+<meta property="og:image" content="https://remixxyh.github.io/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2024-01-01_21-49-02.png">
+<meta property="og:image" content="https://remixxyh.github.io/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2023-12-21_22-01-41.png">
+<meta property="og:image" content="https://remixxyh.github.io/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2023-12-21_22-03-02.png">
+<meta property="og:image" content="https://remixxyh.github.io/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2023-12-21_22-05-35.png">
+<meta property="og:image" content="https://remixxyh.github.io/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2023-12-22_10-59-22.png">
+<meta property="og:image" content="https://remixxyh.github.io/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2023-12-22_11-06-42.png">
+<meta property="og:image" content="https://remixxyh.github.io/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2023-12-22_17-01-58.png">
+<meta property="og:image" content="https://remixxyh.github.io/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2023-12-22_17-02-28.png">
+<meta property="og:image" content="https://remixxyh.github.io/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2023-12-22_15-12-03.png">
+<meta property="og:image" content="https://remixxyh.github.io/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2024-01-01_22-01-37.png">
+<meta property="og:image" content="https://remixxyh.github.io/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2024-01-01_22-09-55.png">
+<meta property="og:image" content="https://remixxyh.github.io/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2024-01-03_15-27-02.png">
+<meta property="article:published_time" content="2024-01-03T07:55:17.000Z">
+<meta property="article:modified_time" content="2024-01-03T07:58:17.623Z">
+<meta property="article:author" content="3xsh0re">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://remixxyh.github.io/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2024-01-01_15-20-48.png">
+  
+  
+  
+  <title>2023强网杯babyre - 3xsh0re</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"remixxyh.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"vIkPGtXoC93i79dQ8HOxhY47-MdYXbMMI","app_key":"X45W6ylXfIClx5FtIsbKJsLb","server_url":"https://vikpgtxo.api.lncldglobal.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>3xsh0re&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/an1.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="2023强网杯babyre"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-01-03 15:55" pubdate>
+          2024年1月3日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          57 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">2023强网杯babyre</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2024年1月3日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>这道题比赛的时候做了半天也没有做出了，加密部分倒是搞懂了，就是得不到正确的flag，后来看来题解才知道自己的路还有很长</p>
+<span id="more"></span>
+
+<h3 id="做题前置知识"><a href="#做题前置知识" class="headerlink" title="做题前置知识"></a>做题前置知识</h3><h4 id="TLS反调试机制"><a href="#TLS反调试机制" class="headerlink" title="TLS反调试机制"></a>TLS反调试机制</h4><p><a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-1490663-1-1.html">参考文章1</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/helloylh/p/17209669.html">参考文章2</a></p>
+<p><code>TLS</code>是<code>Thread Local Storage</code>的缩写，即线程局部存储。<strong>主要是为了解决多线程中变量同步的问题</strong>。</p>
+<p>根据我们所学习的<code>OS</code>的知识，进程中的全局变量和函数内的静态变量，是各个线程都可以访问的共享变量，即<code>线程a</code>修改后，<code>线程b</code>访问时就不是原来的了，当然<code>OS</code>利用信号量解决这种同步问题。</p>
+<p>这造成昂贵的同步开销，所以我们选择一种方式使得每个线程可以保有自己的内部变量，被称为<code>static memory local to a thread</code>线程局部静态变量。这一种新的实现机制就是<code>TLS</code></p>
+<p>强网杯这道题具体用的应该是静态绑定</p>
+<p>那么关于TLS在C++中的具体实现应该如下：</p>
+<ol>
+<li><p>编译器声明使用TLS回调</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> _WIN64       <span class="hljs-comment">//64位</span></span><br>     <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> comment (linker, <span class="hljs-string">&quot;/INCLUDE:_tls_used&quot;</span>)  </span><br>     <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> comment (linker, <span class="hljs-string">&quot;/INCLUDE:tls_callback_func&quot;</span>) </span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span>               <span class="hljs-comment">//32位</span></span><br>     <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> comment (linker, <span class="hljs-string">&quot;/INCLUDE:__tls_used&quot;</span>) </span><br>     <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> comment (linker, <span class="hljs-string">&quot;/INCLUDE:_tls_callback_func&quot;</span>)</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>编写TLS回调函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> NTAPI <span class="hljs-title">tls_callback</span><span class="hljs-params">(PVOID Dllhandle, DWORD Reason, PVOID Reserved)</span> </span>&#123;<br>    BOOL ret;<br>    <span class="hljs-built_in">CheckRemoteDebuggerPresent</span>(<span class="hljs-built_in">GetCurrentProcess</span>(), &amp;ret);<span class="hljs-comment">//检测是否被调试</span><br>    <span class="hljs-keyword">if</span> (ret) &#123;<br>        <span class="hljs-built_in">ExitProcess</span>(<span class="hljs-number">0</span>);<span class="hljs-comment">//退出程序</span><br>    &#125;   <br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>注册TLS回调函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> _WIN64                           <span class="hljs-comment">//64位</span></span><br>    <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> const_seg(<span class="hljs-string">&quot;.CRT$XLF&quot;</span>)</span><br>    EXTERN_C <span class="hljs-type">const</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>    <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> data_seg(<span class="hljs-string">&quot;.CRT$XLF&quot;</span>)        <span class="hljs-comment">//32位</span></span><br>    EXTERN_C<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>PIMAGE_TLS_CALLBACK tls_callback_func[] = &#123; tls_callback,<span class="hljs-number">0</span> &#125;;<br><span class="hljs-comment">//这里是个回调函数数组，可以定义多个，可以为空，0必须加上用于结束</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> _WIN64                           <span class="hljs-comment">//64位</span></span><br>    <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> const_seg()</span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>    <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> data_seg()                  <span class="hljs-comment">//32位</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">//_WIN64</span></span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>至于TLS在程序运行过程中的变化应该是这样的：</p>
+<ol>
+<li><strong>OS加载可执行文件，查找所有TLS回调函数，不用从OEP进去后到主线程执行</strong></li>
+<li><strong>OS在重新启动时（或者线程创建销毁），调用TLS回调函数</strong></li>
+<li><strong>进入（返回）主函数</strong></li>
+</ol>
+<h4 id="TEA加密算法"><a href="#TEA加密算法" class="headerlink" title="TEA加密算法"></a>TEA加密算法</h4><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zpchcbd/p/15974293.html">参考文章</a></p>
+<p>算法特点：</p>
+<ol>
+<li>使用64位(8byte)明文分组和128位密钥(4*32bit,通常是4个8byte数组)</li>
+<li>sum是用于每轮混淆，每次加δ</li>
+<li>使用Feistel分组加密框架（使用上一轮生成的数据和原始数据的另一半进行XOR异或操作，作为下一轮轮函数的输入），一般为32轮</li>
+</ol>
+<p><img src="/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2024-01-01_15-20-48.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delta 0x9E3779B9 <span class="hljs-comment">//常数Delta</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-comment">// 加密</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Encrypt</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> *EntryData,<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> *Key)</span></span>&#123;<br>    <span class="hljs-comment">// 根据算法，分为8字节一轮</span><br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> v0 = EntryData[<span class="hljs-number">0</span>];<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> v1 = EntryData[<span class="hljs-number">1</span>];<br><br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>;i &lt; <span class="hljs-number">32</span>;i++)&#123;<br>        sum += delta;<br>        v0 += (v1&lt;&lt;<span class="hljs-number">4</span> + Key[<span class="hljs-number">0</span>])^(v1 + sum)^(v1&gt;&gt;<span class="hljs-number">5</span> + Key[<span class="hljs-number">1</span>]);<br>        v1 += (v0&lt;&lt;<span class="hljs-number">4</span> + Key[<span class="hljs-number">2</span>])^(v0 + sum)^(v0&gt;&gt;<span class="hljs-number">5</span> + Key[<span class="hljs-number">3</span>]);<br>    &#125;<br>    EntryData[<span class="hljs-number">0</span>] = v0;<br>    EntryData[<span class="hljs-number">1</span>] = v1;<br>&#125;<br><span class="hljs-comment">// 解密，加密反过来就行</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Decrypt</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> *Encrypted_data,<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> *Key)</span></span>&#123;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> sum = delta*<span class="hljs-number">32</span>;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> v0 = Encrypted_data[<span class="hljs-number">0</span>];<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> v1 = Encrypted_data[<span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>;i &lt; <span class="hljs-number">32</span>;i++)&#123;<br>        <span class="hljs-comment">// 先算v1</span><br>        v1 -= (v0&lt;&lt;<span class="hljs-number">4</span> + Key[<span class="hljs-number">2</span>])^(v0 + sum)^(v0&gt;&gt;<span class="hljs-number">5</span> + Key[<span class="hljs-number">3</span>]);<br>        v0 -= (v1&lt;&lt;<span class="hljs-number">4</span> + Key[<span class="hljs-number">0</span>])^(v1 + sum)^(v1&gt;&gt;<span class="hljs-number">5</span> + Key[<span class="hljs-number">1</span>]);<br>        sum -= delta;<br>    &#125;<br>    Encrypted_data[<span class="hljs-number">0</span>] = v0;<br>    Encrypted_data[<span class="hljs-number">1</span>] = v1;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> Data[<span class="hljs-number">3</span>]=&#123;<span class="hljs-number">0x48535833</span>,<span class="hljs-number">0x21455230</span>,<span class="hljs-number">0x0</span>&#125;;<br>    cout &lt;&lt; <span class="hljs-string">&quot;明文：&quot;</span> &lt;&lt; (<span class="hljs-type">char</span>*)Data &lt;&lt;endl;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span>  Key[<span class="hljs-number">4</span>] = &#123; <span class="hljs-number">0x212A3D44</span>,<span class="hljs-number">0x15667788</span>,<span class="hljs-number">0x92AABBCC</span>,<span class="hljs-number">0xD12EFF11</span>&#125;;<br>    <span class="hljs-built_in">Encrypt</span>(Data,Key);<br>    cout &lt;&lt; <span class="hljs-string">&quot;密文：&quot;</span> &lt;&lt; *Data &lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt; *(Data+<span class="hljs-number">1</span>) &lt;&lt;endl;<br>    <span class="hljs-built_in">Decrypt</span>(Data,Key);<br>    cout &lt;&lt; <span class="hljs-string">&quot;明文：&quot;</span> &lt;&lt; (<span class="hljs-type">char</span>*)Data &lt;&lt;endl;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="XTEA加密算法"><a href="#XTEA加密算法" class="headerlink" title="XTEA加密算法"></a>XTEA加密算法</h4><p>XTEA（TEAN）算法相比于TEA的改变在于：<strong>取哪一个密钥通过sum计算得到，而TEA是固定下标</strong></p>
+<p><img src="/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2024-01-01_21-49-41.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delta 0x9E3779B9</span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-comment">// 加密</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Encrypt</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> *Data,<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> *Key)</span></span>&#123;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> v0 = Data[<span class="hljs-number">0</span>];<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> v1 = Data[<span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>;i &lt; <span class="hljs-number">32</span>;i++)&#123;<br>        v0 += ((v1&lt;&lt;<span class="hljs-number">4</span>)^(v1&gt;&gt;<span class="hljs-number">5</span>) + v1) ^ (sum + Key[sum&amp;<span class="hljs-number">3</span>]);<span class="hljs-comment">//sum&amp;3:00,01,11</span><br>        sum += delta;<br>        v1 += ((v0&lt;&lt;<span class="hljs-number">4</span>)^(v0&gt;&gt;<span class="hljs-number">5</span>) + v0) ^ (sum + Key[(sum&gt;&gt;<span class="hljs-number">11</span>)&amp;<span class="hljs-number">3</span>]);<span class="hljs-comment">//将sum高五位中的低两位获取</span><br>    &#125;<br>    Data[<span class="hljs-number">0</span>] = v0;<br>    Data[<span class="hljs-number">1</span>] = v1;<br>&#125;<br><span class="hljs-comment">// 解密</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Decrypt</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> *Encrypted_data,<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> *Key)</span></span>&#123;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> sum = delta*<span class="hljs-number">32</span>;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> v0 =Encrypted_data[<span class="hljs-number">0</span>];<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> v1 =Encrypted_data[<span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>;i &lt; <span class="hljs-number">32</span>;i++)&#123;<br>        v1 -= ((v0&lt;&lt;<span class="hljs-number">4</span>)^(v0&gt;&gt;<span class="hljs-number">5</span>) + v0) ^ (sum + Key[(sum&gt;&gt;<span class="hljs-number">11</span>)&amp;<span class="hljs-number">3</span>]);<br>        sum -= delta;<br>        v0 -= ((v1&lt;&lt;<span class="hljs-number">4</span>)^(v1&gt;&gt;<span class="hljs-number">5</span>) + v1) ^ (sum + Key[sum&amp;<span class="hljs-number">3</span>]);<br>    &#125;<br>    Encrypted_data[<span class="hljs-number">0</span>] = v0;<br>    Encrypted_data[<span class="hljs-number">1</span>] = v1;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    cout&lt;&lt; <span class="hljs-string">&quot;这是XTEA算法!&quot;</span>&lt;&lt;endl;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> Data[<span class="hljs-number">3</span>]=&#123;<span class="hljs-number">0x48535833</span>,<span class="hljs-number">0x21455230</span>,<span class="hljs-number">0x0</span>&#125;;<br>    cout &lt;&lt; <span class="hljs-string">&quot;明文：&quot;</span> &lt;&lt; (<span class="hljs-type">char</span>*)Data &lt;&lt;endl;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span>  Key[<span class="hljs-number">4</span>] = &#123; <span class="hljs-number">0x212A3D44</span>,<span class="hljs-number">0x15667788</span>,<span class="hljs-number">0x92AABBCC</span>,<span class="hljs-number">0xD12EFF11</span>&#125;;<br>    <span class="hljs-built_in">Encrypt</span>(Data,Key);<br>    cout &lt;&lt; <span class="hljs-string">&quot;密文：&quot;</span> &lt;&lt; *Data &lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt; *(Data+<span class="hljs-number">1</span>) &lt;&lt;endl;<br>    <span class="hljs-built_in">Decrypt</span>(Data,Key);<br>    cout &lt;&lt; <span class="hljs-string">&quot;明文：&quot;</span> &lt;&lt; (<span class="hljs-type">char</span>*)Data &lt;&lt;endl;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2024-01-01_21-49-02.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="babyre"><a href="#babyre" class="headerlink" title="babyre"></a>babyre</h3><h4 id="解决TLS反调试"><a href="#解决TLS反调试" class="headerlink" title="解决TLS反调试"></a>解决TLS反调试</h4><p>首先我们已经知道了这道题加了TLS反调试，然后学习了具体的原理，现在就是实践中去摸索到底时如何实现的。</p>
+<h5 id="寻觅TLS"><a href="#寻觅TLS" class="headerlink" title="寻觅TLS"></a>寻觅TLS</h5><p>打开IDA调试，首先我们进入到程序入口位置，</p>
+<p><img src="/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2023-12-21_22-01-41.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后一直点击到内层函数，直到此处，重命名为<code>check_DBG</code>，点击进去分析就知道为啥这里是了</p>
+<p><img src="/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2023-12-21_22-03-02.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后里面是这样的：这里已经很明显用了<code>TLS</code>反调试了，如果返回值表示正在被调试，那么直接退出进程；反之才会进入我们的<code>encrypt_func()</code></p>
+<p><img src="/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2023-12-21_22-05-35.png" srcset="/img/loading.gif" lazyload></p>
+<p>当然为了更加确认，我们可以在IDA中搜索字符串，发现一个<code>SomeThing Go Wrong\n</code>，点击到该处位置，对函数按<code>x</code>发现交叉引用，发现在两个<code>TLS</code>的<code>callback</code>函数。</p>
+<p><img src="/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2023-12-22_10-59-22.png" srcset="/img/loading.gif" lazyload></p>
+<p>点击到一个回调函数分析：和我上面列举的<code>TLS</code>反调试例子就很像了</p>
+<p><img src="/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2023-12-22_11-06-42.png" srcset="/img/loading.gif" lazyload></p>
+<p>所以可以发现，<strong>如果存在<code>tlsCallback_</code>之类的函数就得小心了，IDA按<code>shift+F7</code>查看代码段，如果存在<code>.tls</code>也得小心了</strong></p>
+<h5 id="反反调试"><a href="#反反调试" class="headerlink" title="反反调试"></a>反反调试</h5><p>至此我们确定<code>babyre</code>这道题使用了<code>TLS</code>来反调试，那么接下来的问题就是如何反反调试，<strong>这里首先有个简单的方法，首先自己运行程序，然后用x64dbg附加进程，就可以动态调试了，但是这样不太方便，每次都要重新跑程序。</strong></p>
+<p><img src="/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2023-12-22_17-01-58.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2023-12-22_17-02-28.png" srcset="/img/loading.gif" lazyload></p>
+<p>通过上面的方法拿到的密文和密钥：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs assembly">E0 F2 23 95 93 C2 D8 8E 93 C3 68 86 BC 50 F2 DD<br>99 44 0E 51 44 BD 60 8C F2 AB DC 34 60 D2 0F C1<br><br>62 6F 6D 62<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2023-12-22_15-12-03.png" srcset="/img/loading.gif" lazyload></p>
+<p>这里采用修改汇编代码的方式把反调试给patch掉，笔者也是第一次做这种操作，太菜了😭</p>
+<p>首先需要定位到在哪里我们可以进入正常的加密算法，在上面我们已经分析出来了，就在我们重命名的<code>check_DBG</code>函数里，接下来计算地址，</p>
+<p>(期末考试ing，未完待续)</p>
+<h3 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h3><p>进入主逻辑中的加密算法，首先有0-1、2-3、4-5、6-7两个一组进去加密，根据我们刚刚拿到的密文，可以发现就是一共4组，每组64bit，和上面的TEA和XTEA的输入要求是一样。</p>
+<p><img src="/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2024-01-01_22-01-37.png" srcset="/img/loading.gif" lazyload></p>
+<p>进入函数分析，发现确实就是一个魔改过的XTEA算法，具体在轮数是33，加密方式变为<code>(v1*5)^(v1&gt;&gt;4)</code>，其他的大差不差的😋</p>
+<p><img src="/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2024-01-01_22-09-55.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Decrypt</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> *Encrypted_data,<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> *Key)</span></span>&#123;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> sum = <span class="hljs-number">0x90508D47</span> - delta*<span class="hljs-number">33</span>;<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> v0 = Encrypted_data[<span class="hljs-number">0</span>];<br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> v1 = Encrypted_data[<span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>;i &lt; <span class="hljs-number">33</span>;i++)&#123;<br>        sum += delta;<br>        v1 -= ((<span class="hljs-number">32</span>*v0)^(v0&gt;&gt;<span class="hljs-number">4</span>) + v0) ^ (sum + Key[(sum &gt;&gt; <span class="hljs-number">11</span>) &amp; <span class="hljs-number">3</span>]);<br>        v0 -= ((<span class="hljs-number">32</span>*v1)^(v1&gt;&gt;<span class="hljs-number">4</span>) + v1) ^ (sum + Key[sum &amp; <span class="hljs-number">3</span>]) ^ sum;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>下面就是魔改后的XTEA算法的解密脚本，然后在主函数中发现之后还有一个切割逻辑，方便和答案比较，在实际的解密脚本中无需太过关心。</p>
+<p><img src="/2024/01/03/2023%E5%BC%BA%E7%BD%91%E6%9D%AFbabyre/Snipaste_2024-01-03_15-27-02.png" srcset="/img/loading.gif" lazyload></p>
+<p>下面是完整脚本：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdint.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> delta 0x77BF7F99</span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">uint32_t</span> Key[<span class="hljs-number">4</span>] = &#123;<span class="hljs-number">0x62</span>,<span class="hljs-number">0x6F</span>,<span class="hljs-number">0x6D</span>,<span class="hljs-number">0x62</span>&#125;;<br><span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> Encrypted_data[] = <br>&#123;<br>    <span class="hljs-number">0xE0</span>,<span class="hljs-number">0xF2</span>,<span class="hljs-number">0x23</span>,<span class="hljs-number">0x95</span>,<span class="hljs-number">0x93</span>,<span class="hljs-number">0xC2</span>,<span class="hljs-number">0xD8</span>,<span class="hljs-number">0x8E</span>,<br>    <span class="hljs-number">0x93</span>,<span class="hljs-number">0xC3</span>,<span class="hljs-number">0x68</span>,<span class="hljs-number">0x86</span>,<span class="hljs-number">0xBC</span>,<span class="hljs-number">0x50</span>,<span class="hljs-number">0xF2</span>,<span class="hljs-number">0xDD</span>,<br>    <span class="hljs-number">0x99</span>,<span class="hljs-number">0x44</span>,<span class="hljs-number">0x0E</span>,<span class="hljs-number">0x51</span>,<span class="hljs-number">0x44</span>,<span class="hljs-number">0xBD</span>,<span class="hljs-number">0x60</span>,<span class="hljs-number">0x8C</span>,<br>    <span class="hljs-number">0xF2</span>,<span class="hljs-number">0xAB</span>,<span class="hljs-number">0xDC</span>,<span class="hljs-number">0x34</span>,<span class="hljs-number">0x60</span>,<span class="hljs-number">0xD2</span>,<span class="hljs-number">0x0F</span>,<span class="hljs-number">0xC1</span><br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Encrypt</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> *Data,<span class="hljs-type">uint32_t</span> *Key)</span></span>&#123;<br>    <span class="hljs-type">uint32_t</span> sum = <span class="hljs-number">0x90508D47</span>;<br>    <span class="hljs-type">uint32_t</span> v0 = Data[<span class="hljs-number">0</span>];<br>    <span class="hljs-type">uint32_t</span> v1 = Data[<span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> j = <span class="hljs-number">0</span> ; j&lt;<span class="hljs-number">4</span> ;j++)&#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>;i &lt; <span class="hljs-number">33</span>;i++)&#123;<br>            v0 += ((<span class="hljs-number">32</span>*v1)^(v1&gt;&gt;<span class="hljs-number">4</span>) + v1) ^ (sum + Key[sum &amp; <span class="hljs-number">3</span>]) ^ sum;<br>            v1 += ((<span class="hljs-number">32</span>*v0)^(v0&gt;&gt;<span class="hljs-number">4</span>) + v0) ^ (sum + Key[(sum &gt;&gt; <span class="hljs-number">11</span>) &amp; <span class="hljs-number">3</span>]);<br>            sum -= delta;<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Decrypt</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> Encrypted_data[<span class="hljs-number">2</span>],<span class="hljs-type">uint32_t</span> Key[<span class="hljs-number">4</span>])</span></span>&#123;<br>    <span class="hljs-type">uint32_t</span> sum = <span class="hljs-number">0x90508D47</span>;<span class="hljs-comment">// - delta*33*4;</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; ++i)<br>    &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">33</span>; ++j)<br>        &#123;<br>            sum -= delta;<br>        &#125;<br>    &#125;<br>    <span class="hljs-type">uint32_t</span> v0 = Encrypted_data[<span class="hljs-number">0</span>];<br>    <span class="hljs-type">uint32_t</span> v1 = Encrypted_data[<span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">4</span>; j++)<br>    &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>;i &lt; <span class="hljs-number">33</span>;i++)&#123;<br>            sum += delta;<br>            v1 -= (((<span class="hljs-number">32</span>*v0)^(v0&gt;&gt;<span class="hljs-number">4</span>)) + v0) ^ (sum + Key[(sum &gt;&gt; <span class="hljs-number">11</span>) &amp; <span class="hljs-number">3</span>]);<br>            v0 -= (((<span class="hljs-number">32</span>*v1)^(v1&gt;&gt;<span class="hljs-number">4</span>)) + v1) ^ (sum + Key[sum &amp; <span class="hljs-number">3</span>]) ^ sum;<br>        &#125;<br>    &#125;<br>Encrypted_data[<span class="hljs-number">0</span>]=v0;<br>Encrypted_data[<span class="hljs-number">1</span>]=v1;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">uint32_t</span> *flag = (<span class="hljs-type">uint32_t</span> *)Encrypted_data;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span> ; i++)&#123;<br>        <span class="hljs-built_in">Decrypt</span>(&amp;flag[i*<span class="hljs-number">2</span>],Key);<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>,flag);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/CTF/" class="category-chain-item">CTF</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/CTF/" class="print-no-link">#CTF</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>2023强网杯babyre</div>
+      <div>https://remixxyh.github.io/2024/01/03/2023强网杯babyre/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>3xsh0re</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年1月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/12/0Day%E5%AE%89%E5%85%A8%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E7%AC%AC2%E7%89%88%E9%98%85%E8%AF%BB%E9%9A%8F%E7%AC%943/" title="0Day安全软件漏洞分析第2版阅读随笔3">
+                        <span class="hidden-mobile">0Day安全软件漏洞分析第2版阅读随笔3</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"OYnUsPOOxWtnPXQH1Dxz9wjM-gzGzoHsz","appKey":"GoMWtP1iHSKKpwsbzBlVqJ7P","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/tororo.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
